@@ -28,6 +28,7 @@ values."
      emacs-lisp
      git
      python
+     restclient
      ;; markdown
      ;; org
      ;; (shell :variables
@@ -220,10 +221,12 @@ layers configuration. You are free to put any user code."
  '(helm-apropos-fuzzy-match t)
  '(helm-buffers-fuzzy-matching t)
  '(helm-file-cache-fuzzy-match t)
+ '(helm-imenu-fuzzy-match t)
  '(helm-lisp-fuzzy-completion t)
  '(helm-locate-fuzzy-match "/usr/bin/locate")
  '(helm-recentf-fuzzy-match t)
- '(helm-swoop-use-fuzzy-match t))
+ '(helm-semantic-fuzzy-match t)
+ '(helm-swoop-use-fuzzy-match nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
