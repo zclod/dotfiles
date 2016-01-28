@@ -25,10 +25,17 @@ values."
      ;; ----------------------------------------------------------------
      auto-completion
      ;; better-defaults
-     emacs-lisp
      git
-     python
      restclient
+     ;; LANGUAGES
+     emacs-lisp
+     python
+     html
+     ;;haskell
+     (haskell
+      :variables haskell-enable-hindent-style "chris-done"
+      ;;haskell-enable-shm-support t
+      )
      ;; markdown
      ;; org
      ;; (shell :variables
@@ -202,6 +209,10 @@ user code."
    ;;Avy
    avy-all-windows 'all-frames
    )
+
+  ;;haskell
+  ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+  (add-to-list 'exec-path "~/.local/bin/")
   )
 
 (defun dotspacemacs/user-config ()
@@ -217,6 +228,13 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(haskell-notify-p t)
+ '(haskell-package-conf-file nil)
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-type (quote stack-ghci))
+ '(haskell-program-name "hugs \"+.\"")
+ '(haskell-tags-on-save t)
  '(helm-M-x-fuzzy-match t)
  '(helm-apropos-fuzzy-match t)
  '(helm-buffers-fuzzy-matching t)
@@ -225,7 +243,7 @@ layers configuration. You are free to put any user code."
  '(helm-lisp-fuzzy-completion t)
  '(helm-locate-fuzzy-match "/usr/bin/locate")
  '(helm-recentf-fuzzy-match t)
- '(helm-semantic-fuzzy-match t)
+ '(helm-semantic-fuzzy-match t t)
  '(helm-swoop-use-fuzzy-match nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
