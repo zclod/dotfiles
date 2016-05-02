@@ -50,7 +50,9 @@ values."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '(evil-search-highlight-persist)
+   dotspacemacs-excluded-packages '(
+                                    ;; evil-search-highlight-persist
+                                    )
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
@@ -235,23 +237,25 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(haskell-notify-p t)
+ '(evil-search-module (quote evil-search))
+ '(haskell-notify-p t t)
  '(haskell-package-conf-file nil)
- '(haskell-process-auto-import-loaded-modules t)
- '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-auto-import-loaded-modules t t)
+ '(haskell-process-suggest-remove-import-lines t t)
  '(haskell-process-type (quote stack-ghci))
  '(haskell-program-name "hugs \"+.\"")
- '(haskell-tags-on-save t)
+ '(haskell-tags-on-save t t)
  '(helm-M-x-fuzzy-match t)
  '(helm-apropos-fuzzy-match t)
  '(helm-buffers-fuzzy-matching t)
  '(helm-file-cache-fuzzy-match t)
- '(helm-imenu-fuzzy-match t)
+ '(helm-imenu-fuzzy-match t t)
  '(helm-lisp-fuzzy-completion t)
  '(helm-locate-fuzzy-match "/usr/bin/locate")
  '(helm-recentf-fuzzy-match t)
  '(helm-semantic-fuzzy-match t t)
- '(helm-swoop-use-fuzzy-match nil))
+ '(helm-swoop-use-fuzzy-match nil)
+ '(magit-log-section-arguments (quote ("--graph" "--decorate" "-n256"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
