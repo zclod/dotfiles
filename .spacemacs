@@ -108,7 +108,7 @@ values."
                                :size 20
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -178,7 +178,7 @@ values."
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
    dotspacemacs-inactive-transparency 90
    ;; If non nil unicode symbols are displayed in the mode line. (default t)
-   dotspacemacs-mode-line-unicode-symbols t
+   dotspacemacs-mode-line-unicode-symbols nil
    ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters the
    ;; point when it reaches the top or bottom of the screen. (default t)
@@ -207,13 +207,25 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-  (setq-default
-   ;; miscellaneus
-   vc-follow-symlinks t
-   evli-shift-round nil
+  )
 
-   ;;Avy
+(defun dotspacemacs/user-config ()
+  "Configuration function for user code.
+ This function is called at the very end of Spacemacs initialization after
+layers configuration. You are free to put any user code."
+
+  (setq-default
+   ;; follow symlink when opening a file
+   vc-follow-symlinks t
+
+   ;; indentation
+   evil-shift-round nil
+
+   ;; use Avy everywhere
    avy-all-windows 'all-frames
+
+   ;; powerline theme
+   powerline-default-separator 'arrow
    )
 
   ;;haskell
@@ -224,14 +236,9 @@ user code."
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
 
-  )
-
-(defun dotspacemacs/user-config ()
-  "Configuration function for user code.
- This function is called at the very end of Spacemacs initialization after
-layers configuration. You are free to put any user code."
-
+  ;; activate crosshairs mode
   (crosshairs-mode)
+
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
