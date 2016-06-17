@@ -51,6 +51,7 @@ values."
    dotspacemacs-additional-packages '(
                                       ;; Themes
                                       solarized-theme
+                                      monokai-theme
                                       ;; Misc
                                       crosshairs
                                       )
@@ -278,6 +279,9 @@ you should place your code here."
   (add-to-list 'exec-path "~/.local/bin/")
   ;; -----------------------------------------------------------------
   ;; Theming
+
+  ;; open gui client maximized
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
   ;; Highlights
   (setq col-highlight-vline-face-flag  t
