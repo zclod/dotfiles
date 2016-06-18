@@ -52,6 +52,7 @@ values."
                                       ;; Themes
                                       solarized-theme
                                       monokai-theme
+                                      ;; moe-theme
                                       ;; Misc
                                       crosshairs
                                       )
@@ -111,6 +112,7 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         solarized-dark
                          spacemacs-dark
                          )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
@@ -251,6 +253,11 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+
+  ;; disable auto ssh/dns config that increase startup time
+  (setq tramp-ssh-controlmaster-options
+        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -260,10 +267,6 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-
-  ;; disable auto ssh/dns config that increase startup time
-  (setq tramp-ssh-controlmaster-options
-        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
 
   (setq-default
    ;; follow symlink when opening a file
@@ -295,7 +298,7 @@ you should place your code here."
   ;; (set-terminal-parameter nil 'background-mode 'dark)
   ;; (set-frame-parameter nil 'background-mode 'dark)
   ;; (spacemacs/load-theme 'solarized)
-  (spacemacs/load-theme 'solarized-dark)
+  ;; (spacemacs/load-theme 'solarized-dark)
   ;; -----------------------------------------------------------------
   )
 
