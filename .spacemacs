@@ -34,11 +34,19 @@ values."
      javascript
      haskell
      markdown
+     yaml
      ;; ----------------------------------------------------------------
 
      ;; Misc
+
+     ;; org-mode layer with evil bindings
      org
+     ;; http requests made easy
      restclient
+     ;; irc client
+     erc
+     ;; windows management
+     eyebrowse
 
      ;; improve dired navigation
      (ranger :variables
