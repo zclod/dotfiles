@@ -200,6 +200,9 @@ you should place your code here."
    ;; indentation
    evil-shift-round nil
    )
+  ;; ----------------------------------------------------------------
+  ;; Keybinding
+  (spacemacs/set-leader-keys "jp" 'sp-splice-sexp)
 
   ;; ----------------------------------------------------------------
   ;; Haskell
