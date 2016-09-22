@@ -35,6 +35,7 @@ values."
      haskell
      markdown
      yaml
+     latex
      ;; ----------------------------------------------------------------
 
      ;; Misc
@@ -202,10 +203,22 @@ you should place your code here."
    )
   ;; ----------------------------------------------------------------
   ;; Keybinding
+
+  ;; remove pair of parents
   (spacemacs/set-leader-keys "jp" 'sp-splice-sexp)
+  ;; toggle vertical highlight
+  (spacemacs/set-leader-keys "thv" 'column-highlight-mode)
+
+  ;; ----------------------------------------------------------------
+  ;; emmet-mode
+
+  ;; tab to expand snippet in normal mode
+  (evil-define-key 'normal emmet-mode-keymap (kbd "TAB") 'emmet-expand-yas)
+  (evil-define-key 'normal emmet-mode-keymap (kbd "<tab>") 'emmet-expand-yas)
 
   ;; ----------------------------------------------------------------
   ;; Haskell
+
   (spacemacs/set-leader-keys-for-major-mode 'haskell-mode
     "mht"  'ghc-show-type)
   (add-to-list 'exec-path "~/.local/bin/")
