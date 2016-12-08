@@ -6,3 +6,4 @@ export SUDO_EDITOR="emacsclient -t"
 export ALTERNATE_EDITOR=emacs EDITOR=emacsclient VISUAL=emacsclient
 
 alias clc="clear"
+alias open=xdg-open

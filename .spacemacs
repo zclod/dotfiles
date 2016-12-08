@@ -200,6 +200,9 @@ you should place your code here."
 
    ;; indentation
    evil-shift-round nil
+
+   ;; unordered escape sequence
+   evil-escape-unordered-key-sequence t
    )
   ;; ----------------------------------------------------------------
   ;; Keybinding
