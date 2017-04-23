@@ -48,6 +48,8 @@ values."
      restclient
      ;; irc client
      erc
+     ;; nix integration
+     nixos
 
      ;; improve dired navigation
      (ranger :variables
@@ -303,6 +305,7 @@ you should place your code here."
    ;; indentation
    evil-shift-round nil
    ;; unordered escape sequence
+   evil-escape-key-sequence "jk"
    evil-escape-unordered-key-sequence t
    )
   ;; ----------------------------------------------------------------
@@ -318,10 +321,8 @@ you should place your code here."
   (evil-define-key 'normal emmet-mode-keymap (kbd "<tab>") 'emmet-expand-yas)
   ;; ----------------------------------------------------------------
   ;; Haskell
-  (spacemacs/set-leader-keys-for-major-mode 'haskell-mode
-    "mht"  'ghc-show-type)
   (add-to-list 'exec-path "~/.local/bin/")
-  (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+  (add-hook 'haskell-mode-hook (lambda() (flycheck-select-checker 'haskell-hlint)))
   (defun haskell-indentation-advice ()
     (when (and (< 1 (line-number-at-pos))
                (save-excursion
