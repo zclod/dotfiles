@@ -1,13 +1,13 @@
-"  ___ _           _         
+"  ___ _           _
 " | _ \ |_  _ __ _(_)_ _  ___
 " |  _/ | || / _` | | ' \(_-<
 " |_| |_|\_,_\__, |_|_||_/__/
-"            |___/           
+"            |___/
 "
 " Dependencies:
-" 	-fzf
-" 	-ag
-" 	-ctags (for tagbar)
+"   fzf
+"   ag
+"   ctags (for tagbar)
 
 
 
@@ -17,7 +17,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin('~/.config/nvim/plugged')  
+call plug#begin('~/.config/nvim/plugged')
 
 "Look and feel---------------------------------------------------
 
@@ -33,10 +33,11 @@ Plug 'altercation/vim-colors-solarized'
 "Utilities-------------------------------------------------------
 
 Plug 'neomake/neomake'
-Plug 'Shougo/deoplete.nvim'  " completion framework
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " completion framework
 Plug 'SirVer/ultisnips'      " snippets framework
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'jiangmiao/auto-pairs' " parents balancer
 Plug 'terryma/vim-expand-region'
 Plug 'junegunn/limelight.vim' " highlight editing scope
@@ -59,7 +60,7 @@ Plug 'airblade/vim-gitgutter'
 
 "Haskell
 Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
-Plug 'bitc/vim-hdevtools',   	  {'for': 'haskell'}
+Plug 'bitc/vim-hdevtools',        {'for': 'haskell'}
 Plug 'eagletmt/neco-ghc',         {'for': 'haskell'}
 "----------------------------------------------------------------
 
@@ -68,11 +69,11 @@ call plug#end()
 
 "###############################################################
 
-"   ___           __ _                    _   _          
-"  / __|___ _ _  / _(_)__ _ _  _ _ _ __ _| |_(_)___ _ _  
-" | (__/ _ \ ' \|  _| / _` | || | '_/ _` |  _| / _ \ ' \ 
+"   ___           __ _                    _   _
+"  / __|___ _ _  / _(_)__ _ _  _ _ _ __ _| |_(_)___ _ _
+" | (__/ _ \ ' \|  _| / _` | || | '_/ _` |  _| / _ \ ' \
 "  \___\___/_||_|_| |_\__, |\_,_|_| \__,_|\__|_\___/_||_|
-"                     |___/                              
+"                     |___/
 
 "###############################################################
 
@@ -85,6 +86,16 @@ autocmd! BufWritePost,BufEnter * Neomake
 "use silver searcher with the ack plugin
 let g:ackprg = 'ag --vimgrep'
 let g:ackpreview = 1
+
+
+"-------------------------------------------------------------
+"Fugitive
+"delete older fugitive created buffers
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+"-------------------------------------------------------------
+" Deoplete
+let g:deoplete#enable_at_startup = 1
 
 "-------------------------------------------------------------
 "Limelight

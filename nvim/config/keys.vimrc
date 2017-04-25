@@ -1,9 +1,9 @@
 
-"  _  __         _    _         _ _              
+"  _  __         _    _         _ _
 " | |/ /___ _  _| |__(_)_ _  __| (_)_ _  __ _ ___
 " | ' </ -_) || | '_ \ | ' \/ _` | | ' \/ _` (_-<
 " |_|\_\___|\_, |_.__/_|_||_\__,_|_|_||_\__, /__/
-"           |__/                        |___/    
+"           |__/                        |___/
 "
 
 
@@ -14,13 +14,19 @@ let mapleader="\<SPACE>"
 inoremap jk <esc>
 inoremap kj <esc>
 
+" Terminal esc remap
+tnoremap <Esc> <C-\><C-n>
+
 " no ex mode
 nnoremap Q <nop>
 
-" Common spacemacs keybindings ----------------------------------------
+" Common spacemacs keybindings #########################################
 
 " commands fuzzy finder
 nnoremap <Leader><Leader> :Commands<CR>
+
+" comment visual mode
+vnoremap <Leader>; :Commentary<CR>
 
 "# a
 nmap <Leader>al <Plug>(EasyAlign)
@@ -92,4 +98,4 @@ nnoremap <Leader>wj <C-w>j
 nnoremap <Leader>wk <C-w>k
 " move left
 nnoremap <Leader>wl <C-w>l
-"----------------------------------------------------------------------
+"######################################################################
