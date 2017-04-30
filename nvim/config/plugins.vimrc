@@ -35,6 +35,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " completion framework
 Plug 'SirVer/ultisnips'      " snippets framework
+Plug 'ervandew/supertab'     " tab completion
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -42,6 +43,7 @@ Plug 'jiangmiao/auto-pairs' " parents balancer
 Plug 'terryma/vim-expand-region'
 Plug 'junegunn/limelight.vim' " highlight editing scope
 Plug 'junegunn/vim-easy-align'
+Plug 'jpalardy/vim-slime'  "repl integration
 
 "fzf fuzzy finder install
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -53,7 +55,10 @@ Plug 'majutsushi/tagbar'
 
 "Version control-------------------------------------------------
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'rhysd/committia.vim'      " Sweet message committer
 "----------------------------------------------------------------
 
 "Languages-------------------------------------------------------
@@ -87,7 +92,6 @@ autocmd! BufWritePost,BufEnter * Neomake
 let g:ackprg = 'ag --vimgrep'
 let g:ackpreview = 1
 
-
 "-------------------------------------------------------------
 "Fugitive
 "delete older fugitive created buffers
@@ -96,7 +100,12 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 "-------------------------------------------------------------
 " Deoplete
 let g:deoplete#enable_at_startup = 1
-
+"C-space to open completion suggestion
+if has("gui_running")
+    inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
+else
+    inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
+endif
 "-------------------------------------------------------------
 "Limelight
 "
@@ -113,8 +122,5 @@ let g:limelight_conceal_guifg = '#777777'
 let g:limelight_priority = -1
 
 "-------------------------------------------------------------
-"Haskell
-let g:neomake_haskell_enabled_makers = ["hdevtools", "hlint"]
-" Disable haskell-vim omnifunc
-let g:haskellmode_completion_ghc = 0
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+"Slime
+let g:slime_target = "neovim"

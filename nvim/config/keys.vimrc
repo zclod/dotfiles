@@ -9,6 +9,7 @@
 
 " Leader key
 let mapleader="\<SPACE>"
+let maplocalleader = ","
 
 " Esc remap
 inoremap jk <esc>
@@ -28,6 +29,10 @@ nnoremap <Leader><Leader> :Commands<CR>
 " comment visual mode
 vnoremap <Leader>; :Commentary<CR>
 
+" go to last used buffer
+nnoremap <Leader><tab> :buffer #<CR>
+
+
 "# a
 nmap <Leader>al <Plug>(EasyAlign)
 xmap <Leader>al <Plug>(EasyAlign)
@@ -38,6 +43,8 @@ xmap <Leader>al <Plug>(EasyAlign)
 nnoremap <Leader>bb :Buffers<CR>
 " delete current buffer
 nnoremap <Leader>bd :bdelete<CR>
+" delete other buffers
+nnoremap <Leader>bD :w \| %bd \| e#<CR>
 "----------------------------------------------------------------------
 
 "# f    -Files
@@ -51,6 +58,7 @@ nnoremap <Leader>fe :Explore<CR>
 
 "# g    -Git
 nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gl :GV<CR>
 "----------------------------------------------------------------------
 
 "# h    -Help
