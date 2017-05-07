@@ -1,0 +1,23 @@
+snippet release "Nix release file" b
+let config = {
+	packageOverrides = pkgs: rec {
+		haskellPackages = pkgs.haskellPackages.override {
+			overrides = self: super: rec {
+
+				$1 = self.callPackage ./default.nix {};
+
+			};
+		};
+	};
+};
+
+pkgs = import <nixpkgs> {inherit config;};
+
+in {
+	$1 = pkgs.haskellPackages.callPackage ./default.nix {};
+}
+endsnippet
+
+snippet shell "default nix-shell definition" b
+(import ${1:./release.nix}).$2.env
+endsnippet
