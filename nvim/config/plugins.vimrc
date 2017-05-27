@@ -124,3 +124,14 @@ let g:limelight_priority = -1
 "-------------------------------------------------------------
 "Slime
 let g:slime_target = "neovim"
+"smart function to start a slime repl
+function! SlimeRepl(repl)
+  let currentfile = expand('%:p')
+  let cursorpos = getpos(".")
+  call termopen(a:repl)
+  let termid = b:terminal_job_id
+  vnew
+  execute "edit " . fnameescape(currentfile)
+  call setpos(".", cursorpos)
+  let b:slime_config={'jobid':termid}
+endfunction
