@@ -1,3 +1,5 @@
-source $HOME/.config/nvim/config/plugins.vimrc
-source $HOME/.config/nvim/config/general.vimrc
-source $HOME/.config/nvim/config/keys.vimrc
+let g:config_root = "~/.config/nvim/"
+
+runtime config/plugins.vimrc
+runtime config/general.vimrc
+runtime config/keys.vimrc

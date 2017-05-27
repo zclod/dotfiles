@@ -6,6 +6,26 @@ $1
 -}
 endsnippet
 
-snippet prag "Pragma declaration" b
+snippet lang "Language pragma declaration" b
 {-# LANGUAGE $1 #-}
+endsnippet
+
+snippet inlinable "inlinable function" b
+{-# INLINABLE $1 #-}
+endsnippet
+
+snippet upk "unpack pragma" b
+{-# UNPACK #-}
+endsnippet
+
+snippet pragma "general pragma" b
+{-# $1 $2 #-}
+endsnippet
+
+snippet imp "normal import" b
+import           $1
+endsnippet
+
+snippet impq "qualified import" b
+import qualified $1 as $2
 endsnippet

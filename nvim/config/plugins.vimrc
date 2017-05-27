@@ -12,12 +12,12 @@
 
 
 " auto-install vim-plug
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if empty(glob(g:config_root.'autoload/plug.vim'))
+  silent exec "!curl -fLo" g:config_root.'autoload/plug.vim' "--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
   autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin(g:config_root.'plugged')
 
 "Look and feel---------------------------------------------------
 
