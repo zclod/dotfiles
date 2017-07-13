@@ -18,10 +18,10 @@ nnoremap <buffer> <Localleader>sc :HdevtoolsClear<CR>
 "open repl session
 nnoremap <buffer> <Localleader>cc :call SlimeRepl("cabal repl")<CR>
 "send line or selection to normal slime
-nnoremap <buffer> <silent> <Localleader>l :SlimeSend<CR>
-vnoremap <buffer> <silent> <Localleader>l :SlimeSend<CR>
+nnoremap <buffer> <silent> <Localleader>, :SlimeSend<CR>
+vnoremap <buffer> <silent> <Localleader>, :SlimeSend<CR>
 "send line or selection to haskell script mode slime
-nnoremap <buffer> <silent> <Localleader>, :set ft=haskell.script<CR> <bar> :SlimeSend<CR> <bar> :set ft=haskell<CR>
+nnoremap <buffer> <silent> <Localleader>l :set ft=haskell.script<CR> <bar> :SlimeSend<CR> <bar> :set ft=haskell<CR>
 "C-U to ignore selection during 'set' command
-vnoremap <buffer> <silent> <Localleader>, :<C-U>set ft=haskell.script<CR> <bar> :'<,'>SlimeSend<CR> <bar> :<C-U>set ft=haskell<CR>
+vnoremap <buffer> <silent> <Localleader>l :<C-U>set ft=haskell.script<CR> <bar> :'<,'>SlimeSend<CR> <bar> :<C-U>set ft=haskell<CR>
 "##############################################################

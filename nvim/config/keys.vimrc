@@ -17,9 +17,15 @@ inoremap kj <esc>
 
 " Terminal esc remap
 tnoremap <Esc> <C-\><C-n>
+tnoremap jk <C-\><C-n>
+tnoremap kj <C-\><C-n>
 
 " no ex mode
 nnoremap Q <nop>
+
+"search under cursor without move to next occurrence
+nnoremap * *N
+nnoremap # #N
 
 " Common spacemacs keybindings #########################################
 

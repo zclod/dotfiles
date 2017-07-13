@@ -14,7 +14,7 @@ let config = {
 pkgs = import <nixpkgs> {inherit config;};
 
 in {
-	$1 = pkgs.haskellPackages.callPackage ./default.nix {};
+	$1 = pkgs.haskellPackages.$1;
 }
 endsnippet
 

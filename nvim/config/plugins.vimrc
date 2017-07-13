@@ -87,6 +87,10 @@ call plug#end()
 autocmd! BufWritePost,BufEnter * Neomake
 
 "-------------------------------------------------------------
+"vim-commentary
+autocmd FileType nix setlocal commentstring=#\ %s
+
+"-------------------------------------------------------------
 "Ack
 "use silver searcher with the ack plugin
 let g:ackprg = 'ag --vimgrep'
