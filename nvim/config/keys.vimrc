@@ -27,10 +27,13 @@ nnoremap Q <nop>
 nnoremap * *N
 nnoremap # #N
 
+"use vim surround with "s" in visual mode
+vmap s S
+
 " Common spacemacs keybindings #########################################
 
 " commands fuzzy finder
-nnoremap <Leader><Leader> :Commands<CR>
+nnoremap <M-x> :Commands<CR>
 
 " comment visual mode
 vnoremap <Leader>; :Commentary<CR>
@@ -113,3 +116,6 @@ nnoremap <Leader>wk <C-w>k
 " move left
 nnoremap <Leader>wl <C-w>l
 "######################################################################
+"
+"Easymotion
+nmap s <Plug>(easymotion-overwin-f2)

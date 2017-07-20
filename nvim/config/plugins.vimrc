@@ -44,6 +44,7 @@ Plug 'terryma/vim-expand-region'
 Plug 'junegunn/limelight.vim' " highlight editing scope
 Plug 'junegunn/vim-easy-align'
 Plug 'jpalardy/vim-slime'  "repl integration
+Plug 'easymotion/vim-easymotion'
 
 "fzf fuzzy finder install
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -89,6 +90,10 @@ autocmd! BufWritePost,BufEnter * Neomake
 "-------------------------------------------------------------
 "vim-commentary
 autocmd FileType nix setlocal commentstring=#\ %s
+
+"-------------------------------------------------------------
+"easymotion
+let g:EasyMotion_smartcase = 1
 
 "-------------------------------------------------------------
 "Ack

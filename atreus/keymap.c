@@ -9,9 +9,6 @@
 
 #define _______ KC_TRNS
 
-/* #define TAP_ONCE(code)  \ */
-/*   register_code (code); \ */
-/*   unregister_code (code); */
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
@@ -89,15 +86,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	|------+------+------+------+------|              |------+------+------+------+------|
 	|      |      |      |      |      |              |   ^  |   $  |   %  |  &   |   `  |
 	|------+------+------+------+------|------.,------|------+------+------+------+------|
-	|      |      |      |      |      |      ||      |   à  |   è  |   ì  |   ò  |   ù  |
+	|      |      |      |      |      |      ||      |   ?  |   !  |   @  |  #   |      |
 	|------+------+------+------+------|      ||      |------+------+------+------+------|
-	|      |      |      |      |      |------'`------|   !  |   @  |   #  |      |      |
+	|      |      |      |      |      |------'`------|      |      |      |      |      |
 	`----------------------------------'              `----------------------------------'*/
 	
 [_SYMBOL] = {
   {_______, _______, _______, _______, _______, _______, TD(TD_RNB), TD(TD_SQB), TD(TD_CRB), TD(TD_ANB), KC_TILD   },
   {_______, _______, _______, _______, _______, _______, KC_CIRC,    KC_DLR,     KC_PERC,    KC_AMPR,    KC_GRV    },
-  {_______, _______, _______, _______, _______, _______, UC(0x00e0), UC(0x00e8), UC(0x00ec), UC(0x00f2), UC(0x00f9)},
+  {_______, _______, _______, _______, _______, _______, KC_QUES,    KC_EXLM,    KC_AT,      KC_HASH,    _______   },
   {_______, _______, _______, _______, _______, _______, KC_EXLM,    KC_AT,      KC_HASH,    _______,    _______   }
 },
 
@@ -123,36 +120,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	,----------------------------------.              ,----------------------------------.
 	|   Q  |   W  |   E  |   R  |   T  |              |   Y  |   U  |   I  |   O  |   P  |
 	|------+------+------+------+------|              |------+------+------+------+------|
-	|   A  |   S  |   D  |   F  |   G  |              |   H  |   J  |   K  |   L  |  ;   |
+	|   A  |   S  |   D  |   F  |   G  |              |   H  |   J  |   K  |   L  |  *   |
 	|------+------+------+------+------|------.,------|------+------+------+------+------|
 	|SFT  Z|   X  |   C  |   V  |   B  | CTRL ||Alt   |   N  |   M  |   ,  |   .  |SFT  /|
 	|------+------+------+------+------|  TAB ||Enter |------+------+------+------+------|
-	|  del |  esc |_MISC |  GUI | BkSp |------'`------|  Spc | MISC |   '  |   -  |   \  |
+	|  esc |  del |_MISC |  GUI | BkSp |------'`------|  Spc |   ;  |   '  |   -  |   \  |
 	`----------------------------------'              `----------------------------------' */
 	
 [_QWERTY] = {
-  {KC_Q,               KC_W,              KC_E,               KC_R,           KC_T,    _______,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P                 },
-  {KC_A,               LT(_SYMBOL, KC_S), LT(_NUMBERS, KC_D), LT(_ARR, KC_F), KC_G,    _______,              KC_H,    KC_J,    KC_K,    KC_L,    TD(TD_ANB)           },
-  {MT(MOD_LSFT, KC_Z), KC_X,              KC_C,               KC_V,           KC_B,    MT(MOD_LALT, KC_ENT), KC_N,    KC_M,    KC_COMM, KC_DOT,  MT(MOD_LSFT, KC_SLSH)},
-  {KC_DEL,             KC_ESC,            TT(_MISC),          KC_LGUI,        KC_BSPC, MT(MOD_LCTL, KC_TAB), KC_SPC,  KC_SCLN, KC_QUOT, KC_MINS, KC_BSLS              }
+  {KC_Q,               KC_W,   LT(_SYMBOL, KC_E), LT(_NUMBERS, KC_R), KC_T,    _______,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P                 },
+  {KC_A,               KC_S,   KC_D,              LT(_ARR, KC_F),     KC_G,    _______,              KC_H,    KC_J,    KC_K,    KC_L,    KC_PAST              },
+  {MT(MOD_LSFT, KC_Z), KC_X,   KC_C,              KC_V,               KC_B,    MT(MOD_LALT, KC_ENT), KC_N,    KC_M,    KC_COMM, KC_DOT,  MT(MOD_LSFT, KC_SLSH)},
+  {KC_ESC,             KC_DEL, TT(_MISC),         KC_LGUI,            KC_BSPC, MT(MOD_LCTL, KC_TAB), KC_SPC,  KC_SCLN, KC_QUOT, KC_MINS, KC_BSLS              }
 },
 
 	/* Colemak Layer (Mod DH)
 	,----------------------------------.              ,----------------------------------.
-	|   Q  |   W  |   F  |   P  |   B  |              |   J  |   L  |   U  |   Y  |  ;   |
+	|   Q  |   W  |   F  |   P  |   B  |              |   J  |   L  |   U  |   Y  |  *   |
 	|------+------+------+------+------|              |------+------+------+------+------|
 	|   A  |   R  |   S  |   T  |   G  |              |   K  |   N  |   E  |   I  |  O   |
 	|------+------+------+------+------|------.,------|------+------+------+------+------|
 	|SFT  Z|   X  |   C  |   D  |   V  | CTRL ||Alt   |   M  |   H  |   ,  |   .  |SFT  /|
 	|------+------+------+------+------|  TAB ||Enter |------+------+------+------+------|
-	|  del |  esc |_MISC |  GUI | BkSp |------'`------|  Spc | MISC |   '  |   -  |   \  |
+	|  esc |  del |_MISC |  GUI | BkSp |------'`------|  Spc |   ;  |   '  |   -  |   \  |
 	`----------------------------------'              `----------------------------------'*/
 	
 [_COLEMAK] = {
-  {KC_Q,               KC_W,              KC_F,               KC_P,           KC_B,    _______,              KC_J,    KC_L,    KC_U,    KC_Y,    TD(TD_ANB)           },
-  {KC_A,               LT(_SYMBOL, KC_R), LT(_NUMBERS, KC_S), LT(_ARR, KC_T), KC_G,    _______,              KC_K,    KC_N,    KC_E,    KC_I,    KC_O                 },
-  {MT(MOD_LSFT, KC_Z), KC_X,              KC_C,               KC_D,           KC_V,    MT(MOD_LALT, KC_ENT), KC_M,    KC_H,    KC_COMM, KC_DOT,  MT(MOD_LSFT, KC_SLSH)},
-  {KC_DEL,             KC_ESC,            TT(_MISC),          KC_LGUI,        KC_BSPC, MT(MOD_LCTL, KC_TAB), KC_SPC,  KC_SCLN, KC_QUOT, KC_MINS, KC_BSLS              }
+  {KC_Q,               KC_W,   LT(_SYMBOL, KC_F), LT(_NUMBERS, KC_P), KC_B,    _______,              KC_J,    KC_L,    KC_U,    KC_Y,    KC_PAST              },
+  {KC_A,               KC_R,   KC_S,              LT(_ARR, KC_T),     KC_G,    _______,              KC_K,    KC_N,    KC_E,    KC_I,    KC_O                 },
+  {MT(MOD_LSFT, KC_Z), KC_X,   KC_C,              KC_D,               KC_V,    MT(MOD_LALT, KC_ENT), KC_M,    KC_H,    KC_COMM, KC_DOT,  MT(MOD_LSFT, KC_SLSH)},
+  {KC_ESC,             KC_DEL, TT(_MISC),         KC_LGUI,            KC_BSPC, MT(MOD_LCTL, KC_TAB), KC_SPC,  KC_SCLN, KC_QUOT, KC_MINS, KC_BSLS              }
 }
 };
 
