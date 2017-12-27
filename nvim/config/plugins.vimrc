@@ -64,6 +64,8 @@ Plug 'rhysd/committia.vim'      " Sweet message committer
 
 "Languages-------------------------------------------------------
 
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
 "Haskell
 Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
 Plug 'bitc/vim-hdevtools',        {'for': 'haskell'}

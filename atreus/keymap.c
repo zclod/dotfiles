@@ -1,21 +1,17 @@
-// this is the style you want to emulate.
-// This is the canonical layout file for the Quantum project. If you want to add another keyboard,
-
 #include "atreus.h"
 #include "action_layer.h"
 #include "eeconfig.h"
 
 #define _______ KC_TRNS
+#define ___X___ KC_NO
 
-// Each layer gets a name for readability, which is then used in the keymap matrix below.
-// The underscores don't mean anything - you can have a layer called STUFF or any other name.
-// Layer names don't all need to be of the same length, obviously, and you can also skip them
-// entirely and just use numbers.
-#define _MISC 5  //misc
-#define _ARR 4  //arrows
-#define _SYMBOL 3  //symbols
+// Layer list
+#define _GAME    6  //gaming layout
+#define _MISC    5  //misc
+#define _ARR     4  //arrows
+#define _SYMBOL  3  //symbols
 #define _NUMBERS 2  //numbers
-#define _QWERTY 1  //qwerty
+#define _QWERTY  1  //qwerty
 #define _COLEMAK 0  //colemak
 
 //tap dance declaration
@@ -23,7 +19,6 @@ enum {
   TD_RNB = 0, // ()
   TD_SQB = 1, // []
   TD_CRB = 2, // {}
-  TD_ANB = 3  // <>
 };
 
 enum planck_keycodes {
@@ -36,11 +31,31 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_RNB]  = ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_RPRN),
   [TD_SQB]  = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
   [TD_CRB]  = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_RCBR),
-  [TD_ANB]  = ACTION_TAP_DANCE_DOUBLE(KC_LABK, KC_RABK)
 };
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
+
+	/* GAMING Layer
+	,----------------------------------.              ,----------------------------------.
+	|   Q  |   W  |   E  |   R  |   T  |              |   Y  |   U  |   I  |   O  |   P  |
+	|------+------+------+------+------|              |------+------+------+------+------|
+	|   A  |   S  |   D  |   F  |   G  |              |   H  |   J  |   K  |   L  |  *   |
+	|------+------+------+------+------|------.,------|------+------+------+------+------|
+	|   Z  |   X  |   C  |   V  |   B  | CTRL ||      |   N  |   M  |   .  |   ?  |SFT  /|
+	|------+------+------+------+------|      ||Enter |------+------+------+------+------|
+	|   3  |   2  |   1  |  SFT | Alt  |------'`------| BkSp |  Spc |   ,  |  TAB |      |
+	`----------------------------------'              `----------------------------------' */
+	
+[_GAME] = {
+  {KC_Q, KC_W,   KC_E, KC_R,    KC_T,    ___X___, KC_Y,    KC_U,   KC_I,    KC_O,    KC_P                 },
+  {KC_A, KC_S,   KC_D, KC_F,    KC_G,    ___X___, KC_H,    KC_J,   KC_K,    KC_L,    KC_ASTR              },
+  {KC_Z, KC_X,   KC_C, KC_V,    KC_B,    KC_ENT,  KC_N,    KC_M,   KC_DOT,  KC_QUES, MT(MOD_LSFT, KC_SLSH)},
+  {KC_3, KC_2,   KC_1, KC_LSFT, KC_LALT, KC_LCTL, KC_BSPC, KC_SPC, KC_COMM, KC_TAB,  _______              }
+},
+
+
 	/* Misc
 	,----------------------------------.              ,----------------------------------.
 	| print|      |  up  |      | volup|              |   f1 |  f2  |  f3  |  f4  |  f5  |
@@ -49,14 +64,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	|------+------+------+------+------|------.,------|------+------+------+------+------|
 	|      |  <<  |  ||> |  >>  |      |      ||      |  f11 |  f12 |      |      |      |
 	|------+------+------+------+------|      ||      |------+------+------+------+------|
-	| reset|      |      |      |      |------'`------|      |      |      |QWERTY|COLEMK|
+	| reset|      |      |      |      |------'`------|      |      |QWERTY|COLEMK|_GAME |
 	`----------------------------------'              `----------------------------------'*/
 	
 [_MISC] = {
-  {KC_PSCR, _______, KC_UP,   _______, KC_VOLU, _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,  KC_F5   },
-  {_______, KC_LEFT, KC_DOWN, KC_RGHT, KC_VOLD, _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10  },
-  {_______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, KC_F11,  KC_F12,  KC_F2,   KC_F3,  KC_F12  },
-  {RESET  , _______, _______, _______, _______, _______, _______, _______, _______, QWERTY, COLEMAK }
+  {KC_PSCR, ___X___, KC_UP,   ___X___, KC_VOLU, ___X___, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5     },
+  {___X___, KC_LEFT, KC_DOWN, KC_RGHT, KC_VOLD, ___X___, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10    },
+  {___X___, KC_MPRV, KC_MPLY, KC_MNXT, ___X___, _______, KC_F11,  KC_F12,  KC_F2,   KC_F3,   KC_F12    },
+  {RESET  , ___X___, _______, ___X___, _______, _______, _______, ___X___, QWERTY,  COLEMAK, TG(_GAME) }
 },
 
 
@@ -72,46 +87,46 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	`----------------------------------'              `----------------------------------'*/
 	
 [_ARR] = {
-  {_______, _______, _______, _______, _______, _______,              KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______},
-  {_______, _______, _______, _______, _______, _______,              KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______},
-  {_______, _______, _______, _______, _______, MT(MOD_LSFT, KC_ENT), _______, _______, _______, _______, _______},
-  {_______, _______, _______, _______, _______, _______,              _______, _______, _______, _______, _______}
+  {___X___, ___X___, ___X___, ___X___, ___X___, ___X___,              KC_HOME, KC_PGDN, KC_PGUP, KC_END,  ___X___},
+  {___X___, ___X___, ___X___, _______, ___X___, ___X___,              KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, ___X___},
+  {___X___, ___X___, ___X___, ___X___, ___X___, MT(MOD_LSFT, KC_ENT), ___X___, ___X___, ___X___, ___X___, ___X___},
+  {___X___, ___X___, ___X___, ___X___, _______, _______,              _______, ___X___, ___X___, ___X___, ___X___}
 },
 
 	/* symbols
 	,----------------------------------.              ,----------------------------------.
-	|      |      |      |      |      |              |  ()  |  []  |  {}  |  <>  |   ~  |
+	|      |      |      |      |      |              |   `  |  ()  |  []  |  {}  |   ~  |
 	|------+------+------+------+------|              |------+------+------+------+------|
-	|      |      |      |      |      |              |   ^  |   $  |   %  |  &   |   `  |
+	|      |      |      |      |      |              |   ^  |   $  |   %  |  &   |   |  |
 	|------+------+------+------+------|------.,------|------+------+------+------+------|
 	|      |      |      |      |      |      ||      |   ?  |   !  |   @  |  #   |   \  |
 	|------+------+------+------+------|      ||      |------+------+------+------+------|
-	|      |      |      |      |      |------'`------|      |      |      |      |      |
+	|      |      |      |      |      |------'`------|      |   =  |   <  |   >  |   -  |
 	`----------------------------------'              `----------------------------------'*/
 	
 [_SYMBOL] = {
-  {_______, _______, _______, _______, _______, _______, TD(TD_RNB), TD(TD_SQB), TD(TD_CRB), TD(TD_ANB), KC_TILD   },
-  {_______, _______, _______, _______, _______, _______, KC_CIRC,    KC_DLR,     KC_PERC,    KC_AMPR,    KC_GRV    },
-  {_______, _______, _______, _______, _______, _______, KC_QUES,    KC_EXLM,    KC_AT,      KC_HASH,    KC_BSLS   },
-  {_______, _______, _______, _______, _______, _______, KC_EXLM,    KC_AT,      KC_HASH,    _______,    _______   }
+  {___X___, ___X___, ___X___, _______, ___X___, ___X___, KC_GRV,     TD(TD_RNB), TD(TD_SQB), TD(TD_CRB), KC_TILD   },
+  {___X___, ___X___, ___X___, ___X___, ___X___, ___X___, KC_CIRC,    KC_DLR,     KC_PERC,    KC_AMPR,    KC_PIPE   },
+  {___X___, ___X___, ___X___, ___X___, ___X___, _______, KC_QUES,    KC_EXLM,    KC_AT,      KC_HASH,    KC_BSLS   },
+  {___X___, ___X___, ___X___, ___X___, _______, _______, _______,    KC_EQL,     KC_LABK,    KC_RABK,    KC_MINS   }
 },
 
 	/* Numbers
 	,----------------------------------.              ,----------------------------------.
-	|      |      |      |      |      |              |   =  |   7  |   8  |   9  |   +  |
+	|      |      |      |      |      |              |   <  |   7  |   8  |   9  |   >  |
 	|------+------+------+------+------|              |------+------+------+------+------|
-	|      |      |      |      |      |              |   .  |   4  |   5  |   6  |   -  |
+	|      |      |      |      |      |              |   +  |   4  |   5  |   6  |   *  |
 	|------+------+------+------+------|------.,------|------+------+------+------+------|
-	|      |      |      |      |      |      ||      |   0  |   1  |   2  |   3  |   *  |
+	|      |      |      |      |      |      ||      |   -  |   1  |   2  |   3  |   /  |
 	|------+------+------+------+------|      ||      |------+------+------+------+------|
-	|      |      |      |      |      |------'`------|      |      |      |      |   /  |
+	|      |      |      |      |      |------'`------|      |   0  |   .  |   =  |      |
 	`----------------------------------'              `----------------------------------'*/
 	
 [_NUMBERS] = {
-  {_______, _______, _______, _______, _______, _______, KC_EQL,   KC_7,    KC_8,    KC_9,    KC_PLUS},
-  {_______, _______, _______, _______, _______, _______, KC_DOT,   KC_4,    KC_5,    KC_6,    KC_MINS},
-  {_______, _______, _______, _______, _______, _______, KC_0,     KC_1,    KC_2,    KC_3,    KC_ASTR},
-  {_______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, KC_SLSH}
+  {___X___, ___X___, _______, ___X___, ___X___, ___X___, KC_LABK,  KC_7,    KC_8,    KC_9,    KC_RABK},
+  {___X___, ___X___, ___X___, ___X___, ___X___, ___X___, KC_PLUS,  KC_4,    KC_5,    KC_6,    KC_ASTR},
+  {___X___, ___X___, ___X___, ___X___, ___X___, _______, KC_MINS,  KC_1,    KC_2,    KC_3,    KC_SLSH},
+  {___X___, ___X___, ___X___, ___X___, _______, _______, _______,  KC_0,    KC_DOT,  KC_EQL,  ___X___}
 },
 
 	/* QWERTY Layer
@@ -126,8 +141,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	`----------------------------------'              `----------------------------------' */
 	
 [_QWERTY] = {
-  {KC_Q,               KC_W,   LT(_NUMBERS, KC_E), LT(_SYMBOL, KC_R), KC_T,    _______,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P                 },
-  {KC_A,               KC_S,   KC_D,               LT(_ARR, KC_F),    KC_G,    _______,              KC_H,    KC_J,    KC_K,    KC_L,    KC_ASTR              },
+  {KC_Q,               KC_W,   LT(_NUMBERS, KC_E), LT(_SYMBOL, KC_R), KC_T,    ___X___,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P                 },
+  {KC_A,               KC_S,   KC_D,               LT(_ARR, KC_F),    KC_G,    ___X___,              KC_H,    KC_J,    KC_K,    KC_L,    KC_ASTR              },
   {MT(MOD_LSFT, KC_Z), KC_X,   KC_C,               KC_V,              KC_B,    MT(MOD_LALT, KC_ENT), KC_N,    KC_M,    KC_DOT,  KC_QUOT, MT(MOD_LSFT, KC_SLSH)},
   {KC_ESC,             KC_DEL, TT(_MISC),          KC_LGUI,           KC_BSPC, MT(MOD_LCTL, KC_TAB), KC_SPC,  KC_COMM, KC_SCLN, KC_MINS, KC_PLUS              }
 },
@@ -144,8 +159,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	`----------------------------------'              `----------------------------------'*/
 	
 [_COLEMAK] = {
-  {KC_Q,               KC_W,   LT(_NUMBERS, KC_F), LT(_SYMBOL, KC_P), KC_B,    _______,              KC_J,    KC_L,    KC_U,    KC_Y,    KC_ASTR              },
-  {KC_A,               KC_R,   KC_S,               LT(_ARR, KC_T),    KC_G,    _______,              KC_K,    KC_N,    KC_E,    KC_I,    KC_O                 },
+  {KC_Q,               KC_W,   LT(_NUMBERS, KC_F), LT(_SYMBOL, KC_P), KC_B,    ___X___,              KC_J,    KC_L,    KC_U,    KC_Y,    KC_ASTR              },
+  {KC_A,               KC_R,   KC_S,               LT(_ARR, KC_T),    KC_G,    ___X___,              KC_K,    KC_N,    KC_E,    KC_I,    KC_O                 },
   {MT(MOD_LSFT, KC_Z), KC_X,   KC_C,               KC_D,              KC_V,    MT(MOD_LALT, KC_ENT), KC_M,    KC_H,    KC_DOT,  KC_QUOT, MT(MOD_LSFT, KC_SLSH)},
   {KC_ESC,             KC_DEL, TT(_MISC),          KC_LGUI,           KC_BSPC, MT(MOD_LCTL, KC_TAB), KC_SPC,  KC_COMM, KC_SCLN, KC_MINS, KC_PLUS              }
 }

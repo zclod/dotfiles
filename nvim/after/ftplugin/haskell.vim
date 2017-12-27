@@ -24,4 +24,7 @@ vnoremap <buffer> <silent> <Localleader>, :SlimeSend<CR>
 nnoremap <buffer> <silent> <Localleader>l :set ft=haskell.script<CR> <bar> :SlimeSend<CR> <bar> :set ft=haskell<CR>
 "C-U to ignore selection during 'set' command
 vnoremap <buffer> <silent> <Localleader>l :<C-U>set ft=haskell.script<CR> <bar> :'<,'>SlimeSend<CR> <bar> :<C-U>set ft=haskell<CR>
-"##############################################################
+
+"easy arrow generation
+inoremap <buffer> ;; ->
+inoremap <buffer> ;: =>

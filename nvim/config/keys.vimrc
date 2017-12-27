@@ -104,18 +104,18 @@ nnoremap <Leader>wd <C-w>c
 " close other windows
 nnoremap <Leader>wm :only<CR>
 " split horizontal
-nnoremap <Leader>ws :split<CR>
+nnoremap <Leader>w- :split<CR>
 " split vertical
-nnoremap <Leader>wv :vsplit<CR>
-" move right
-nnoremap <Leader>wh <C-w>h
-" move down
-nnoremap <Leader>wj <C-w>j
-" move up
-nnoremap <Leader>wk <C-w>k
+nnoremap <Leader>w/ :vsplit<CR>
 " move left
-nnoremap <Leader>wl <C-w>l
+nnoremap <left> <C-w>h
+" move down
+nnoremap <down> <C-w>j
+" move up
+nnoremap <up> <C-w>k
+" move right
+nnoremap <right> <C-w>l
 "######################################################################
 "
 "Easymotion
-nmap s <Plug>(easymotion-overwin-f2)
+nmap s <Plug>(easymotion-overwin-f)
