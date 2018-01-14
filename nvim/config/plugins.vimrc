@@ -32,7 +32,7 @@ Plug 'altercation/vim-colors-solarized'
 
 "Utilities-------------------------------------------------------
 
-Plug 'neomake/neomake'
+Plug 'w0rp/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " completion framework
 Plug 'SirVer/ultisnips'      " snippets framework
 Plug 'ervandew/supertab'     " tab completion
@@ -45,6 +45,9 @@ Plug 'junegunn/limelight.vim' " highlight editing scope
 Plug 'junegunn/vim-easy-align'
 Plug 'jpalardy/vim-slime'  "repl integration
 Plug 'easymotion/vim-easymotion'
+Plug 'chrisbra/NrrwRgn'
+Plug 'mbbill/undotree'
+Plug 'simeji/winresizer'
 
 "fzf fuzzy finder install
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -67,9 +70,9 @@ Plug 'rhysd/committia.vim'      " Sweet message committer
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
 "Haskell
-Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
-Plug 'bitc/vim-hdevtools',        {'for': 'haskell'}
-Plug 'eagletmt/neco-ghc',         {'for': 'haskell'}
+Plug 'neovimhaskell/haskell-vim',     {'for': 'haskell'}
+" Plug 'bitc/vim-hdevtools',            {'for': 'haskell'}
+" Plug 'eagletmt/neco-ghc',             {'for': 'haskell'}
 "----------------------------------------------------------------
 
 call plug#end()
@@ -86,16 +89,13 @@ call plug#end()
 "###############################################################
 
 "-------------------------------------------------------------
-"neomake
-autocmd! BufWritePost,BufEnter * Neomake
-
-"-------------------------------------------------------------
 "vim-commentary
 autocmd FileType nix setlocal commentstring=#\ %s
 
 "-------------------------------------------------------------
 "easymotion
 let g:EasyMotion_smartcase = 1
+let g:EasyMotion_keys = 'asdghklqwertyuiopzxcbnmvfj'
 
 "-------------------------------------------------------------
 "Ack
@@ -117,6 +117,14 @@ if has("gui_running")
 else
     inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
 endif
+
+"-------------------------------------------------------------
+" Language Server Protocol
+" let g:LanguageClient_serverCommands = {
+"     \ 'haskell': ['hie', '--lsp']
+"     \ }
+let g:LanguageClient_autoStart = 1
+
 "-------------------------------------------------------------
 "Limelight
 "

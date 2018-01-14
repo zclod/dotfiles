@@ -10,8 +10,8 @@ set clipboard+=unnamedplus
 
 set list                " Show invisible characters
 set expandtab           " Insert spaces when TAB is pressed.
-set tabstop=2           " Render TABs using this many spaces.
-set shiftwidth=2        " Indentation amount for < and > commands.
+set tabstop=4           " Render TABs using this many spaces.
+set shiftwidth=4        " Indentation amount for < and > commands.
 
 "Theming-----------------------------------------------------------------------
 colorscheme solarized

@@ -43,16 +43,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	|------+------+------+------+------|              |------+------+------+------+------|
 	|   A  |   S  |   D  |   F  |   G  |              |   H  |   J  |   K  |   L  |  *   |
 	|------+------+------+------+------|------.,------|------+------+------+------+------|
-	|   Z  |   X  |   C  |   V  |   B  | CTRL ||      |   N  |   M  |   .  |   ?  |SFT  /|
+	|   Z  |   X  |   C  |   V  |   B  | Alt  ||      |   N  |   M  |   .  |   ?  |SFT  /|
 	|------+------+------+------+------|      ||Enter |------+------+------+------+------|
-	|   3  |   2  |   1  |  SFT | Alt  |------'`------| BkSp |  Spc |   ,  |  TAB |      |
+	|  esc |   2  |   1  |  SFT | CTRL |------'`------| BkSp |  Spc |   ,  |  TAB |      |
 	`----------------------------------'              `----------------------------------' */
 	
 [_GAME] = {
-  {KC_Q, KC_W,   KC_E, KC_R,    KC_T,    ___X___, KC_Y,    KC_U,   KC_I,    KC_O,    KC_P                 },
-  {KC_A, KC_S,   KC_D, KC_F,    KC_G,    ___X___, KC_H,    KC_J,   KC_K,    KC_L,    KC_ASTR              },
-  {KC_Z, KC_X,   KC_C, KC_V,    KC_B,    KC_ENT,  KC_N,    KC_M,   KC_DOT,  KC_QUES, MT(MOD_LSFT, KC_SLSH)},
-  {KC_3, KC_2,   KC_1, KC_LSFT, KC_LALT, KC_LCTL, KC_BSPC, KC_SPC, KC_COMM, KC_TAB,  _______              }
+  {KC_Q,   KC_W,   KC_E, KC_R,    KC_T,    ___X___, KC_Y,    KC_U,   KC_I,    KC_O,    KC_P                 },
+  {KC_A,   KC_S,   KC_D, KC_F,    KC_G,    ___X___, KC_H,    KC_J,   KC_K,    KC_L,    KC_ASTR              },
+  {KC_Z,   KC_X,   KC_C, KC_V,    KC_B,    KC_ENT,  KC_N,    KC_M,   KC_DOT,  KC_QUES, MT(MOD_LSFT, KC_SLSH)},
+  {KC_ESC, KC_2,   KC_1, KC_LSFT, KC_LCTL, KC_LALT, KC_BSPC, KC_SPC, KC_COMM, KC_TAB,  _______              }
 },
 
 
