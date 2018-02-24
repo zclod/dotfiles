@@ -1,15 +1,3 @@
-"haskell enabled linters
-" let g:neomake_haskell_enabled_makers = ["hdevtools", "hlint"]
-
-let g:LanguageClient_serverCommands = {
-    \ 'haskell': ['hie', '--lsp']
-    \ }
-"autocompletion function
-" setlocal omnifunc=LanguageClient#complete
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 "##############################################################
 "keybinding
 "

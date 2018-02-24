@@ -67,7 +67,10 @@ Plug 'rhysd/committia.vim'      " Sweet message committer
 
 "Languages-------------------------------------------------------
 
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', {
+                                        \ 'branch' : 'next',
+                                        \ 'do': 'bash install.sh'
+                                        \ }
 
 "Haskell
 Plug 'neovimhaskell/haskell-vim',     {'for': 'haskell'}
@@ -120,10 +123,11 @@ endif
 
 "-------------------------------------------------------------
 " Language Server Protocol
-" let g:LanguageClient_serverCommands = {
-"     \ 'haskell': ['hie', '--lsp']
-"     \ }
+let g:LanguageClient_serverCommands = {
+    \ 'haskell': ['hie', '--lsp']
+    \ }
 let g:LanguageClient_autoStart = 1
+set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
 "-------------------------------------------------------------
 "Limelight
