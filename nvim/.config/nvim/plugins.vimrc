@@ -32,8 +32,8 @@ Plug 'altercation/vim-colors-solarized'
 
 "Utilities-------------------------------------------------------
 
-Plug 'w0rp/ale'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " completion framework
+"Plug 'w0rp/ale'
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " completion framework
 Plug 'SirVer/ultisnips'      " snippets framework
 Plug 'ervandew/supertab'     " tab completion
 Plug 'tpope/vim-commentary'
@@ -50,11 +50,11 @@ Plug 'mbbill/undotree'
 Plug 'simeji/winresizer'
 
 "fzf fuzzy finder install
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
 
-Plug 'mileszs/ack.vim'
-Plug 'majutsushi/tagbar'
+"Plug 'mileszs/ack.vim'
+"Plug 'majutsushi/tagbar'
 "----------------------------------------------------------------
 
 "Version control-------------------------------------------------
@@ -67,13 +67,15 @@ Plug 'rhysd/committia.vim'      " Sweet message committer
 
 "Languages-------------------------------------------------------
 
-Plug 'autozimu/LanguageClient-neovim', {
-                                        \ 'branch' : 'next',
-                                        \ 'do': 'bash install.sh'
-                                        \ }
-
-"Haskell
-Plug 'neovimhaskell/haskell-vim',     {'for': 'haskell'}
+"Plug 'neovim/nvim-lsp'
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'autozimu/LanguageClient-neovim', {
+"                                        \ 'branch' : 'next',
+"                                        \ 'do': 'bash install.sh'
+"                                        \ }
+"
+""Haskell
+"Plug 'neovimhaskell/haskell-vim',     {'for': 'haskell'}
 " Plug 'bitc/vim-hdevtools',            {'for': 'haskell'}
 " Plug 'eagletmt/neco-ghc',             {'for': 'haskell'}
 "----------------------------------------------------------------
@@ -103,8 +105,8 @@ let g:EasyMotion_keys = 'asdghklqwertyuiopzxcbnmvfj'
 "-------------------------------------------------------------
 "Ack
 "use silver searcher with the ack plugin
-let g:ackprg = 'ag --vimgrep'
-let g:ackpreview = 1
+"let g:ackprg = 'ag --vimgrep'
+"let g:ackpreview = 1
 
 "-------------------------------------------------------------
 "Fugitive
@@ -113,21 +115,21 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 
 "-------------------------------------------------------------
 " Deoplete
-let g:deoplete#enable_at_startup = 1
-"C-space to open completion suggestion
-if has("gui_running")
-    inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
-else
-    inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
-endif
+"let g:deoplete#enable_at_startup = 1
+""C-space to open completion suggestion
+"if has("gui_running")
+"    inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
+"else
+"    inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
+"endif
 
 "-------------------------------------------------------------
 " Language Server Protocol
-let g:LanguageClient_serverCommands = {
-    \ 'haskell': ['hie', '--lsp']
-    \ }
-let g:LanguageClient_autoStart = 1
-set formatexpr=LanguageClient_textDocument_rangeFormatting()
+"let g:LanguageClient_serverCommands = {
+"    \ 'haskell': ['hie', '--lsp']
+"    \ }
+"let g:LanguageClient_autoStart = 1
+"set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
 "-------------------------------------------------------------
 "Limelight
