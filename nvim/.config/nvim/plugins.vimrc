@@ -6,8 +6,10 @@
 "
 " Dependencies:
 "   fzf
-"   ag
-"   ctags (for tagbar)
+"   ripgrep
+"   sad
+"     fd
+"     delta
 
 
 
@@ -24,37 +26,39 @@ call plug#begin(g:config_root.'plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'nvim-tree/nvim-web-devicons'
+
 "Colorschemes
 Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
-Plug 'altercation/vim-colors-solarized'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'EdenEast/nightfox.nvim'
 "----------------------------------------------------------------
 
 "Utilities-------------------------------------------------------
+Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 
-"Plug 'w0rp/ale'
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }  " completion framework
-Plug 'SirVer/ultisnips'      " snippets framework
-Plug 'ervandew/supertab'     " tab completion
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'stevearc/oil.nvim'
+
+Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+Plug 'ray-x/sad.nvim'
+Plug 'rktjmp/highlight-current-n.nvim'
+
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'jiangmiao/auto-pairs' " parents balancer
-Plug 'terryma/vim-expand-region'
-Plug 'junegunn/limelight.vim' " highlight editing scope
 Plug 'junegunn/vim-easy-align'
-Plug 'jpalardy/vim-slime'  "repl integration
-Plug 'easymotion/vim-easymotion'
-Plug 'chrisbra/NrrwRgn'
 Plug 'mbbill/undotree'
+Plug 'chentoast/marks.nvim'
+
 Plug 'simeji/winresizer'
 
-"fzf fuzzy finder install
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
+Plug 'junegunn/limelight.vim' " highlight editing scope
 
-"Plug 'mileszs/ack.vim'
-"Plug 'majutsushi/tagbar'
+Plug 'easymotion/vim-easymotion'
+Plug 'ggandor/leap.nvim'
 "----------------------------------------------------------------
 
 "Version control-------------------------------------------------
@@ -62,22 +66,23 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'rhysd/committia.vim'      " Sweet message committer
 "----------------------------------------------------------------
 
-"Languages-------------------------------------------------------
+"Completion------------------------------------------------------
+Plug 'ervandew/supertab'     " tab completion
 
-"Plug 'neovim/nvim-lsp'
-"Plug 'neovim/nvim-lspconfig'
-"Plug 'autozimu/LanguageClient-neovim', {
-"                                        \ 'branch' : 'next',
-"                                        \ 'do': 'bash install.sh'
-"                                        \ }
-"
-""Haskell
-"Plug 'neovimhaskell/haskell-vim',     {'for': 'haskell'}
-" Plug 'bitc/vim-hdevtools',            {'for': 'haskell'}
-" Plug 'eagletmt/neco-ghc',             {'for': 'haskell'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+Plug 'hkupty/iron.nvim'
+
+Plug 'SirVer/ultisnips'      " snippets framework
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+
 "----------------------------------------------------------------
 
 call plug#end()
@@ -94,6 +99,7 @@ call plug#end()
 "###############################################################
 
 "-------------------------------------------------------------
+
 "vim-commentary
 autocmd FileType nix setlocal commentstring=#\ %s
 
@@ -103,38 +109,14 @@ let g:EasyMotion_smartcase = 1
 let g:EasyMotion_keys = 'asdghklqwertyuiopzxcbnmvfj'
 
 "-------------------------------------------------------------
-"Ack
-"use silver searcher with the ack plugin
-"let g:ackprg = 'ag --vimgrep'
-"let g:ackpreview = 1
-
-"-------------------------------------------------------------
 "Fugitive
 "delete older fugitive created buffers
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
 "-------------------------------------------------------------
-" Deoplete
-"let g:deoplete#enable_at_startup = 1
-""C-space to open completion suggestion
-"if has("gui_running")
-"    inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
-"else
-"    inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
-"endif
-
-"-------------------------------------------------------------
-" Language Server Protocol
-"let g:LanguageClient_serverCommands = {
-"    \ 'haskell': ['hie', '--lsp']
-"    \ }
-"let g:LanguageClient_autoStart = 1
-"set formatexpr=LanguageClient_textDocument_rangeFormatting()
-
-"-------------------------------------------------------------
 "Limelight
 "
-" Color name (:help cterm-colors) or ANSI code
+"Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 
@@ -147,16 +129,63 @@ let g:limelight_conceal_guifg = '#777777'
 let g:limelight_priority = -1
 
 "-------------------------------------------------------------
-"Slime
-let g:slime_target = "neovim"
-"smart function to start a slime repl
-function! SlimeRepl(repl)
-  let currentfile = expand('%:p')
-  let cursorpos = getpos(".")
-  call termopen(a:repl)
-  let termid = b:terminal_job_id
-  vnew
-  execute "edit " . fnameescape(currentfile)
-  call setpos(".", cursorpos)
-  let b:slime_config={'jobid':termid}
-endfunction
+"Window resizer
+let g:winresizer_start_key = '<C-w>'
+"-------------------------------------------------------------
+"Highlight current n
+" Map keys
+nmap n <Plug>(highlight-current-n-n)
+nmap N <Plug>(highlight-current-n-N)
+
+" If you want the highlighting to take effect in other maps they must
+" also be nmaps (or rather, not "nore").
+"
+" * will search <cword> ahead, but it can be more ergonomic to have *
+" simply fill the / register with the current <cword>, which makes future
+" commands like cgn "feel better". This effectively does that by performing
+" "search ahead <cword> (*), go back to last match (N)".
+nmap * *N
+
+" Some QOL autocommands
+augroup ClearSearchHL
+  autocmd!
+  " You may only want to see hlsearch /while/ searching, you can automatically
+  " toggle hlsearch with the following autocommands
+  autocmd CmdlineEnter /,\? set hlsearch
+  autocmd CmdlineLeave /,\? set nohlsearch
+  " this will apply similar n|N highlighting to the first search result
+  " careful with escaping ? in lua, you may need \\?
+  autocmd CmdlineLeave /,\? lua require('highlight_current_n')['/,?']()
+augroup END
+"-------------------------------------------------------------
+
+lua require("oil").setup()
+
+lua require("sad").setup()
+
+lua require("marks").setup()
+
+"-------------------------------------------------------------
+" Luatree
+
+lua << EOF
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+-- empty setup using defaults
+require("nvim-tree").setup()
+
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+EOF

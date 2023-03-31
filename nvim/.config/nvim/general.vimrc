@@ -14,8 +14,7 @@ set tabstop=4           " Render TABs using this many spaces.
 set shiftwidth=4        " Indentation amount for < and > commands.
 
 "Theming-----------------------------------------------------------------------
-colorscheme solarized
-set background=dark
+colorscheme solarized8_dark_high
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
