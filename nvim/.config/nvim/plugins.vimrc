@@ -10,6 +10,7 @@
 "   sad
 "     fd
 "     delta
+"   nerdfonts (for web-dev-icons)
 
 
 
@@ -41,9 +42,17 @@ Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'stevearc/oil.nvim'
 
+Plug 'nvim-lua/plenary.nvim'
+
+Plug 'easymotion/vim-easymotion'
+
+" Search and replace
 Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
 Plug 'ray-x/sad.nvim'
 Plug 'rktjmp/highlight-current-n.nvim'
+
+" REPL
+Plug 'hkupty/iron.nvim'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -52,36 +61,44 @@ Plug 'jiangmiao/auto-pairs' " parents balancer
 Plug 'junegunn/vim-easy-align'
 Plug 'mbbill/undotree'
 Plug 'chentoast/marks.nvim'
-
 Plug 'simeji/winresizer'
-
 Plug 'junegunn/limelight.vim' " highlight editing scope
-
-Plug 'easymotion/vim-easymotion'
-Plug 'ggandor/leap.nvim'
-"----------------------------------------------------------------
 
 "Version control-------------------------------------------------
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
-Plug 'airblade/vim-gitgutter'
-"----------------------------------------------------------------
+Plug 'lewis6991/gitsigns.nvim'
 
 "Completion------------------------------------------------------
-Plug 'ervandew/supertab'     " tab completion
+" Plug 'ervandew/supertab'     " tab completion
 
 Plug 'neovim/nvim-lspconfig'
+
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'hrsh7th/cmp-nvim-lua'
 
-Plug 'hkupty/iron.nvim'
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+
+Plug 'jose-elias-alvarez/null-ls.nvim'
 
 Plug 'SirVer/ultisnips'      " snippets framework
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+
+"Language servers------------------------------------------------
+
+" manage language servers
+" Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
+" Plug 'williamboman/mason-lspconfig.nvim'
+
+" Java
+Plug 'mfussenegger/nvim-jdtls'
 
 "----------------------------------------------------------------
 
@@ -99,7 +116,28 @@ call plug#end()
 "###############################################################
 
 "-------------------------------------------------------------
+" lua standard plugin attivations
 
+lua require("oil").setup()
+
+lua require("sad").setup()
+" alternative that do not requires delta and fd
+" lua require("sad").setup(diff='less', ls_file='git ls-files')
+
+lua require("marks").setup()
+
+lua require("gitsigns").setup()
+
+lua require("nvim-web-devicons").setup()
+
+" lua require("mason").setup()
+" lua require("mason-lspconfig").setup()
+
+" lua require("lspconfig").jdtls.setup{}
+"-------------------------------------------------------------
+" fzf-lua
+lua require("fzf-lua").register_ui_select()
+"-------------------------------------------------------------
 "vim-commentary
 autocmd FileType nix setlocal commentstring=#\ %s
 
@@ -130,9 +168,10 @@ let g:limelight_priority = -1
 
 "-------------------------------------------------------------
 "Window resizer
-let g:winresizer_start_key = '<C-w>'
+let g:winresizer_start_key = '<C-w><C-r>'
 "-------------------------------------------------------------
 "Highlight current n
+"
 " Map keys
 nmap n <Plug>(highlight-current-n-n)
 nmap N <Plug>(highlight-current-n-N)
@@ -157,35 +196,85 @@ augroup ClearSearchHL
   " careful with escaping ? in lua, you may need \\?
   autocmd CmdlineLeave /,\? lua require('highlight_current_n')['/,?']()
 augroup END
+
 "-------------------------------------------------------------
+" nvim-cmp configuration
 
-lua require("oil").setup()
+lua <<EOF
+-- Set up nvim-cmp.
+local cmp = require'cmp'
 
-lua require("sad").setup()
+cmp.setup({
 
-lua require("marks").setup()
+  mapping = {
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-j>'] = cmp.mapping.select_next_item(),
+    ['<C-k>'] = cmp.mapping.select_prev_item(),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {i, c}),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  },
+
+  sources = {
+      { name = 'nvim_lsp', max_item_count = 15},
+      { name = 'nvim_lsp_signature_help' },
+      { name = 'ultisnips' }, -- For ultisnips users.
+      { name = 'nvim_lsp_lua' },
+      { name = 'buffer', keyword_length = 4, max_item_count = 10 },
+  },
+
+  snippet = {
+    expand = function(args)
+      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+    end,
+  },
+
+  --formatting = {
+  --  format = lspkind.cmp_format {
+  --    mode = "text_symbol",
+  --    menu = ({
+  --    buffer = "[buf]",
+  --    nvim_lsp = "[LSP]",
+  --    path = "[path]",
+  --    ultisnips = "[path]",
+  --    }),
+  --  },
+  --},
+})
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' },
+    { name = 'cmdline', option = {ignore_cdms = {'Man', '!', 'FzfLua'}}},
+  })
+})
+
+-- Set up lspconfig.
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+-- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
+--   capabilities = capabilities
+-- }
+EOF
 
 "-------------------------------------------------------------
 " Luatree
 
-lua << EOF
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
+lua <<EOF
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
 -- empty setup using defaults
 require("nvim-tree").setup()
-
--- OR setup with some options
-require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
-})
 EOF
