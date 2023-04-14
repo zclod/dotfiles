@@ -46,3 +46,6 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- reload a file if it has been changed outside nvim
+vim.o.autoread = true

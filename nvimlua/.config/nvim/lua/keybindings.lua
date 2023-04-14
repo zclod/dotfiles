@@ -46,6 +46,7 @@ map("n", "<Leader>bfd", '<cmd>bdelete!<cr>')
 --# c    -Configuration
 
 map("n", "<Leader>cc", fzf.colorschemes)
+map("n", "<Leader>co", '<cmd>e ~/.config/nvim/init.lua<cr>')
 ----------------------------------------------------------------------
 
 --# d Diagnostic
@@ -57,18 +58,18 @@ map('n', '<leader>dq', vim.diagnostic.setloclist, { desc = "Open diagnostics lis
 
 --# f    -Files
 -- file save
-map("n", "<Leader>fs", '<cmd>w<cr>')
+map("n", "<Leader>fs", '<cmd>w<cr>', { desc = "[f]ile [s]ave" })
 -- save all open files
-map("n", "<Leader>fS", '<cmd>wa<cr>')
+map("n", "<Leader>fS", '<cmd>wa<cr>', { desc = "[S]ave all open files" })
 -- open file explorer
-map("n", "<Leader>fe", function () oil.open('.') end)
+map("n", "<Leader>fe", function () oil.open('.') end, { desc = "[f]ile [e]xplorer" })
 --nnoremap <Leader>fp :Oil 
 map("n", "<Leader>fp", '<cmd>Oil')
 -- toggle file tree
 map("n", "<Leader>ft", '<cmd>NvimTreeToggle<cr>')
 
-map("n", "<Leader>ff", fzf.files)
-map("n", "<Leader>fg", fzf.git_files)
+map("n", "<Leader>ff", fzf.files, { desc = "[f]ind [f]iles" })
+map("n", "<Leader>fg", fzf.git_files, { desc = "[f]ind [g]it files" })
 
 -- open file parent directory with oil -
 map("n", "-", oil.open, { desc = "Open parent directory" })
@@ -83,11 +84,11 @@ map("n", "<Leader>gl", '<cmd>GV<cr>', { desc = "[G]it [L]ogs" })
 map("n", "<Leader>hh", fzf.help_tags)
 ----------------------------------------------------------------------
 --# q    -Quit
-map("n", "<Leader>qq", '<cmd>qa<cr>')
+map("n", "<Leader>qq", '<cmd>qa<cr>', { desc = "[q]uit" })
 -- force close all
-map("n", "<Leader>qQ", '<cmd>qa!<cr>')
+map("n", "<Leader>qQ", '<cmd>qa!<cr>', { desc = "force [Q]uit for all files" })
 -- save and close all
-map("n", "<Leader>qs", '<cmd>xa<cr>')
+map("n", "<Leader>qs", '<cmd>xa<cr>', { desc = "[q]uit and [s]ave all" })
 
 ----------------------------------------------------------------------
 
@@ -96,7 +97,7 @@ map("n", "<Leader>ss", fzf.lgrep_curbuf)
 map("n", "<Leader>sl", fzf.blines)
 map("n", "<Leader>sp", fzf.live_grep_glob)
 -- search and replace
-map("n", "<Leader>sr", '<cmd>Sad<cr>')
+-- map("n", "<Leader>sr", '<cmd>Sad<cr>')
 
 ----------------------------------------------------------------------
 

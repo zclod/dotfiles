@@ -45,4 +45,7 @@ return {
   -- REPL
   'hkupty/iron.nvim',
 
+  -- Debugger
+  {'rcarriga/nvim-dap-ui', opts = {}, dependencies = {'mfussenegger/nvim-dap'}},
+
 }
