@@ -2,17 +2,25 @@
 {
     environment.systemPackages = with pkgs; [
         neovim
+        fd
+        delta
+        sad
+        fzf
+
         git
         mc
         stow
-        fzf
 
         unzip
         firefox
+        rclone
 
-        jre
-        qemu
-        virt-manager
+        nodejs
+        yarn
+
+        keepassxc
+
+	nixos-generators
 
     ];
 }

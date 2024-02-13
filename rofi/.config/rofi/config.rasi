@@ -1,0 +1,6 @@
+configuration {
+
+
+}
+
+@import "~/.cache/wal/colors-rofi-light.rasi"
