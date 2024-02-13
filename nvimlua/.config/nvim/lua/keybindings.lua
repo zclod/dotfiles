@@ -16,6 +16,7 @@ map("n", "Q", "<nop>")
 map({"n", "o", "x"}, "<", "[", {remap = true})
 map({"n", "o", "x"}, ">", "]", {remap = true})
 
+-- for vim-surround
 map("v", "s", "S", {remap = true})
 
 map("n", "<M-x>", fzf.commands)
