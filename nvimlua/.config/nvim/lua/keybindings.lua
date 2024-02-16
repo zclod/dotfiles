@@ -16,9 +16,6 @@ map("n", "Q", "<nop>")
 map({"n", "o", "x"}, "<", "[", {remap = true})
 map({"n", "o", "x"}, ">", "]", {remap = true})
 
--- for vim-surround
-map("v", "s", "S", {remap = true})
-
 map("n", "<M-x>", fzf.commands)
 
 map("n", '<Leader><Tab>', '<cmd>buffer #<cr>')
@@ -64,8 +61,6 @@ map("n", "<Leader>fs", '<cmd>w<cr>', { desc = "[f]ile [s]ave" })
 map("n", "<Leader>fS", '<cmd>wa<cr>', { desc = "[S]ave all open files" })
 -- open file explorer
 map("n", "<Leader>fe", function () oil.open('.') end, { desc = "[f]ile [e]xplorer" })
---nnoremap <Leader>fp :Oil 
-map("n", "<Leader>fp", '<cmd>Oil')
 -- toggle file tree
 map("n", "<Leader>ft", '<cmd>NvimTreeToggle<cr>')
 

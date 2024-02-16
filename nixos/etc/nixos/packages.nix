@@ -2,7 +2,7 @@
 {
     environment.systemPackages = with pkgs; [
         neovim
-        fd
+	fd
         delta
         sad
         fzf
@@ -21,6 +21,5 @@
         keepassxc
 
 	nixos-generators
-
     ];
 }
