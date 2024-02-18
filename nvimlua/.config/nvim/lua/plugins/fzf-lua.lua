@@ -31,8 +31,8 @@ return {
       {"<Leader>sb", mode = {"n"}, function() require('fzf-lua').blines() end, desc = "fuzzy find in lines of [b]uffer"},
       {"<Leader>sB", mode = {"n"}, function() require('fzf-lua').lines() end, desc = "fuzzy find in lines from all [B]uffers"},
       {"<Leader>sp", mode = {"n"}, function() require('fzf-lua').live_grep_glob() end, desc = "[s]earch [p]roject (glob enabled)"},
-      -- {"<Leader>sw", mode = {"n"}, function() require('fzf-lua').live_cword() end, desc = "[s]earch c[w]ord under cursor"},
-      -- {"<Leader>sW", mode = {"n"}, function() require('fzf-lua').live_cWORD() end, desc = "[s]earch c[W]ORD under cursor"},
+      {"<Leader>sw", mode = {"n"}, function() require('fzf-lua').grep_cword() end, desc = "[s]earch c[w]ord under cursor"},
+      {"<Leader>sW", mode = {"n"}, function() require('fzf-lua').grep_cWORD() end, desc = "[s]earch c[W]ORD under cursor"},
 
       {"<Leader>sq", mode = {"n"}, function() require('fzf-lua').quickfix() end, desc = "[s]earch in [q]uickfix window"},
       {"<Leader>sQ", mode = {"n"}, function() require('fzf-lua').quickfix_stack() end, desc = "[s]earch in [Q]uickfix stack"},
