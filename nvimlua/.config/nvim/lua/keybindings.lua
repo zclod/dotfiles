@@ -11,6 +11,8 @@ map("t", "kj", "<C-\\><C-n>")
 -- No ex mode
 map("n", "Q", "<nop>")
 
+map("n", "*", "*N")
+
 map({"n", "o", "x"}, "<", "[", {remap = true})
 map({"n", "o", "x"}, ">", "]", {remap = true})
 
