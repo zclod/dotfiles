@@ -4,7 +4,6 @@ end
 
 -- "Fugitive
 -- "delete older fugitive created buffers
--- autocmd BufReadPost fugitive://* set bufhidden=delete
 vim.api.nvim_create_autocmd({"BufReadPost"}, {
   group = augroup("fugitive"),
   pattern = {"fugitive://*"},

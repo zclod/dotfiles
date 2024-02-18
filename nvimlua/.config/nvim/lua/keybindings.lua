@@ -1,6 +1,4 @@
 local map = require('utils').map
-local fzf = require('fzf-lua')
-local oil = require('oil')
 
 map("i", "jk", "<esc>")
 map("i", "kj", "<esc>")
@@ -16,68 +14,45 @@ map("n", "Q", "<nop>")
 map({"n", "o", "x"}, "<", "[", {remap = true})
 map({"n", "o", "x"}, ">", "]", {remap = true})
 
-map("n", "<M-x>", fzf.commands)
-
-map("n", '<Leader><Tab>', '<cmd>buffer #<cr>')
+-- # to go back to previous buffer
+map("n", '<Leader><Tab>', '<cmd>buffer #<cr>', { desc = "reopen previous buffer"})
 
 -- Keymaps for better default experience
--- See `:help vim.keymap.set()`
 map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
 map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+map("n", "C-q", "<cmd>copen<cr>")
 ----------------------------------------------------------------------
-
 --# b    -Buffers
--- list buffer
-map("n", "<Leader>bb", fzf.buffers)
--- delete current buffer
-map("n", "<Leader>bd", '<cmd>bdelete<cr>')
--- delete other buffers
-map("n", "<Leader>bD", '<cmd>w \\| %bd \\| e#<cr>')
--- force delete current buffers
-map("n", "<Leader>bfd", '<cmd>bdelete!<cr>')
-----------------------------------------------------------------------
+map("n", "<Leader>bd", '<cmd>bdelete<cr>', { desc = "[d]elete current buffer"})
+map("n", "<Leader>bD", '<cmd>w \\| %bd \\| e#<cr>', { desc = "[D]elete all other buffers" })
+map("n", "<Leader>bfd", '<cmd>bdelete!<cr>', { desc = "[f]orce [d]elete current buffer" })
 
+----------------------------------------------------------------------
 --# c    -Configuration
+map("n", "<Leader>co", '<cmd>e ~/.config/nvim/init.lua<cr>', {desc = "[c]onfiguration [o]pen"})
 
-map("n", "<Leader>cc", fzf.colorschemes)
-map("n", "<Leader>co", '<cmd>e ~/.config/nvim/init.lua<cr>')
 ----------------------------------------------------------------------
-
 --# d Diagnostic
 map('n', '<leader>dN', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 map('n', '<leader>dn', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 map('n', '<leader>de', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 map('n', '<leader>dq', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-----------------------------------------------------------------------
 
+----------------------------------------------------------------------
 --# f    -Files
--- file save
 map("n", "<Leader>fs", '<cmd>w<cr>', { desc = "[f]ile [s]ave" })
--- save all open files
 map("n", "<Leader>fS", '<cmd>wa<cr>', { desc = "[S]ave all open files" })
--- open file explorer
-map("n", "<Leader>fe", function () oil.open('.') end, { desc = "[f]ile [e]xplorer" })
--- toggle file tree
-map("n", "<Leader>ft", '<cmd>NvimTreeToggle<cr>')
 
-map("n", "<Leader>ff", fzf.files, { desc = "[f]ind [f]iles" })
-map("n", "<Leader>fg", fzf.git_files, { desc = "[f]ind [g]it files" })
-
--- open file parent directory with oil -
-map("n", "-", oil.open, { desc = "Open parent directory" })
 ----------------------------------------------------------------------
-
 --# g    -Git
-map("n", "<Leader>gs", '<cmd>Git<cr>', { desc = "[G]it [S]tatus" })
-map("n", "<Leader>gl", '<cmd>GV<cr>', { desc = "[G]it [L]ogs" })
 
 ----------------------------------------------------------------------
 --# h    -Help
-map("n", "<Leader>hh", fzf.help_tags)
+--
 ----------------------------------------------------------------------
 --# q    -Quit
 map("n", "<Leader>qq", '<cmd>qa<cr>', { desc = "[q]uit" })
@@ -87,25 +62,15 @@ map("n", "<Leader>qQ", '<cmd>qa!<cr>', { desc = "force [Q]uit for all files" })
 map("n", "<Leader>qs", '<cmd>xa<cr>', { desc = "[q]uit and [s]ave all" })
 
 ----------------------------------------------------------------------
-
 --# s    -Search
-map("n", "<Leader>ss", fzf.lgrep_curbuf)
-map("n", "<Leader>sl", fzf.blines)
-map("n", "<Leader>sp", fzf.live_grep_glob)
--- search and replace
--- map("n", "<Leader>sr", '<cmd>Sad<cr>')
 
 ----------------------------------------------------------------------
 
 --# w    -Window
--- close window (window delete)
-map("n", "<Leader>wd", '<C-w>c')
--- close other windows (window full)
-map("n", "<Leader>wf", '<cmd>only<cr>')
--- split horizontal
-map("n", "<Leader>w-", '<cmd>split<cr>')
--- split vertical
-map("n", "<Leader>w/", '<cmd>vsplit<cr>')
+map("n", "<Leader>wd", '<C-w>c', { desc = "[w]indow [d]elete current" })
+map("n", "<Leader>wf", '<cmd>only<cr>', { desc = "[w]indow [f]ull screen" })
+map("n", "<Leader>wh", '<cmd>split<cr>', { desc = "[w]indow split [h]orizontal" })
+map("n", "<Leader>wv", '<cmd>vsplit<cr>', { desc = "[w]indow split [v]ertical" })
 -- move left
 map("n", "<left>", '<C-w>h')
 -- move down
@@ -114,9 +79,6 @@ map("n", "<down>", '<C-w>j')
 map("n", "<up>", '<C-w>k')
 -- move right
 map("n", "<right>", '<C-w>l')
-
-map("n", "<Leader>wr", '<cmd>WinResizerStartResize<cr>')
-map("n", "<Leader>wm", '<cmd>WinResizerStartMove<cr>')
 
 
 ----------------------------------------------------------------------
