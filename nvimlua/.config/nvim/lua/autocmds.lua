@@ -9,3 +9,10 @@ vim.api.nvim_create_autocmd({"BufReadPost"}, {
   pattern = {"fugitive://*"},
   command = "set bufhidden=delete",
 })
+
+
+vim.api.nvim_create_autocmd({'BufEnter'}, {
+  group = augroup("firenvim"),
+  pattern = {"*overleaf.com_*"},
+  command = "set filetype=tex",
+})
