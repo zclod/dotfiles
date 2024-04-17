@@ -1,5 +1,5 @@
 [colors]
-alpha=0.9
+alpha={alpha.strip}
 foreground={foreground.strip}
 background={background.strip}
 regular0={color0.strip}

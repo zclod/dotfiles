@@ -4,22 +4,27 @@
         neovim
 	fd
         delta
-        sad
         fzf
 
+        htop
         git
-        mc
         stow
 
         unzip
-        firefox
         rclone
-
-        nodejs
-        yarn
 
         keepassxc
 
-	nixos-generators
+        firefox
+        thunderbird
+
+        onedrive
+        onedrivegui
+
+        qbittorrent
+        soulseekqt
+
+        ffmpeg
+        mpv
     ];
 }
