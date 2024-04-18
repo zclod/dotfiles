@@ -21,6 +21,8 @@ button {
 
 /***** MODIFY TO YOUR TASTE *****/
 
+@import url("~/.cache/wal/colors.css");
+
 /* Sample button in sample config w/ no background nor border */
 #button-custom {
     background: rgba (0, 0, 0, 0.0);
