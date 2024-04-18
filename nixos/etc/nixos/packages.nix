@@ -5,6 +5,8 @@
 	fd
         delta
         fzf
+        pipe-rename
+        sd
 
         htop
         git
@@ -26,5 +28,6 @@
 
         ffmpeg
         mpv
+        qimgv
     ];
 }

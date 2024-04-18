@@ -22,5 +22,6 @@
         EDITOR = "nvim";
         SUDO_EDITOR = "nvim";
         VISUAL = "nvim";
+        XPLR_BOOKMARK_FILE = "$HOME/.xplrbookmarks";
     };
 }

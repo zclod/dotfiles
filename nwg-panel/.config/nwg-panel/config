@@ -17,8 +17,7 @@
     "icons": "light",
     "css-name": "panel-top",
     "modules-left": [
-      "sway-workspaces",
-      "playerctl"
+      "sway-workspaces"
     ],
     "modules-center": [
       "clock"
