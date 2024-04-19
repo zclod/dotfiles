@@ -24,7 +24,7 @@
         wayland
         xdg-utils # for opening default programs when clicking links
         glib # gsettings
-        swaylock
+        swaylock-effects
         swayidle
         grim # screenshot functionality
         slurp # screenshot functionality
