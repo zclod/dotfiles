@@ -17,8 +17,8 @@ indicator-radius=240
 indicator-thickness=20
 indicator-caps-lock
 
-key-hl-color={color1}
-bs-hl-color={color2}
+key-hl-color={color2}
+bs-hl-color={color10}
 
 separator-color={color0}
 
@@ -30,19 +30,19 @@ inside-wrong-color={color8}
 
 ring-color={color0}
 ring-clear-color={color3}
-ring-caps-lock-color={color4}
+ring-caps-lock-color={color3}
 ring-ver-color={color1}
-ring-wrong-color={color2}
+ring-wrong-color={color4}
 
 line-color={color0}
 line-clear-color={color3}
-line-caps-lock-color={color4}
+line-caps-lock-color={color3}
 line-ver-color={color0}
-line-wrong-color={color2}
+line-wrong-color={color4}
 
-text-color={color1}
+text-color={color2}
 text-clear-color={color3}
 text-ver-color={color1}
-text-wrong-color={color2}
-text-caps-lock-color={color1}
+text-wrong-color={color4}
+text-caps-lock-color={color2}
 
