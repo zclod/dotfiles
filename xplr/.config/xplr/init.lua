@@ -24,14 +24,24 @@ require("xpm").setup({
   plugins = {
     -- Let xpm manage itself
     'dtomvan/xpm.xplr',
-    { name = 'sayanarijit/fzf.xplr' },
     'Junker/nuke.xplr',
+    'sayanarijit/fzf.xplr',
     'sayanarijit/map.xplr',
+    'sayanarijit/find.xplr',
+    'sayanarijit/wl-clipboard.xplr',
   },
   auto_install = true,
   auto_cleanup = true,
 })
 
+require("fzf").setup{
+  mode = "default",
+  key = "ctrl-f",
+  bin = "fzf",
+  args = "--preview 'pistol {}'",
+  recursive = false,  -- If true, search all files under $PWD
+  enter_dir = true,  -- Enter if the result is directory
+}
 
 require("nuke").setup {
   open = {
@@ -52,16 +62,11 @@ require("nuke").setup {
   },
 }
 
-
-local key = xplr.config.modes.builtin.default.key_bindings.on_key
-
-key.v = {
-  help = "nuke",
-  messages = {"PopMode", {SwitchModeCustom = "nuke"}}
+require("wl-clipboard").setup{
+  copy_command = "wl-copy -t text/uri-list",
+  paste_command = "wl-paste",
+  keep_selection = false,
 }
--- key["f3"] = xplr.config.modes.custom.nuke.key_bindings.on_key.v
-key["enter"] = xplr.config.modes.custom.nuke.key_bindings.on_key.o
-
 
 local map = require("map")
 map.setup{
@@ -75,21 +80,30 @@ map.setup{
   custom_placeholders = map.placeholders,
 }
 
--- batch rename
-key.R = {
-  help = "batch rename",
-  messages = {
-    {
-      BashExec = [===[
-       SELECTION=$(cat "${XPLR_PIPE_SELECTION_OUT:?}")
-       NODES=${SELECTION:-$(cat "${XPLR_PIPE_DIRECTORY_NODES_OUT:?}")}
-       if [ "$NODES" ]; then
-         echo -e "$NODES" | renamer
-         "$XPLR" -m ExplorePwdAsync
-       fi
-     ]===],
+require("find").setup{
+  mode = "default",
+  key = "F",
+  templates = {
+    ["find all"] = {
+      key = "a",
+      find_command = "find",
+      find_args = ". -name ",
+      cursor_position = 8,
+    },
+    ["find files"] = {
+      key = "f",
+      find_command = "find",
+      find_args = ". -name  -type f",
+      cursor_position = 8,
+    },
+    ["find directories"] = {
+      key = "d",
+      find_command = "find",
+      find_args = ". -name  -type d",
+      cursor_position = 8,
     },
   },
+  refresh_screen_key = "ctrl-r",
 }
 
 -- fuzzy search history directories (go_to menu)
@@ -107,8 +121,6 @@ xplr.config.modes.builtin.go_to.key_bindings.on_key.h = {
     },
   },
 }
-
-
 
 -- With `export XPLR_BOOKMARK_FILE="$HOME/bookmarks"`
 -- Bookmark: mode binding
@@ -176,6 +188,43 @@ xplr.config.modes.custom.bookmark = {
           "PopMode",
         },
       },
+    },
+  },
+}
+
+
+
+
+
+-- default mode keybindings
+--
+local key = xplr.config.modes.builtin.default.key_bindings.on_key
+-- key["f3"] = xplr.config.modes.custom.nuke.key_bindings.on_key.v
+key["o"] = xplr.config.modes.custom.nuke.key_bindings.on_key.o
+
+key["e"] = xplr.config.modes.builtin.action.key_bindings.on_key.e
+key["c"] = xplr.config.modes.builtin.selection_ops.key_bindings.on_key.c
+key["m"] = xplr.config.modes.builtin.selection_ops.key_bindings.on_key.m
+
+key.v = {
+  help = "nuke",
+  messages = {"PopMode", {SwitchModeCustom = "nuke"}}
+}
+
+
+-- batch rename
+key.R = {
+  help = "batch rename",
+  messages = {
+    {
+      BashExec = [===[
+       SELECTION=$(cat "${XPLR_PIPE_SELECTION_OUT:?}")
+       NODES=${SELECTION:-$(cat "${XPLR_PIPE_DIRECTORY_NODES_OUT:?}")}
+       if [ "$NODES" ]; then
+         echo -e "$NODES" | renamer
+         "$XPLR" -m ExplorePwdAsync
+       fi
+     ]===],
     },
   },
 }

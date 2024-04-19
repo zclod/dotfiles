@@ -4,6 +4,8 @@ return {
 
     opts = {},
 
+    lazy = false,
+
     keys = {
       { "s", mode = { "n", "o" }, function() require("flash").jump() end, desc = "Flash" },
       --s in visual mode conflict with vim-surround

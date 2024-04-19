@@ -7,6 +7,7 @@
         fzf
         pipe-rename
         sd
+        pistol
 
         htop
         git
