@@ -28,7 +28,9 @@ require("xpm").setup({
     'sayanarijit/fzf.xplr',
     'sayanarijit/map.xplr',
     'sayanarijit/find.xplr',
+    'sayanarijit/dragon.xplr',
     'sayanarijit/wl-clipboard.xplr',
+    'gitlab:hartan/web-devicons.xplr',
   },
   auto_install = true,
   auto_cleanup = true,
@@ -39,7 +41,7 @@ require("fzf").setup{
   key = "ctrl-f",
   bin = "fzf",
   args = "--preview 'pistol {}'",
-  recursive = false,  -- If true, search all files under $PWD
+  recursive = true,  -- If true, search all files under $PWD
   enter_dir = true,  -- Enter if the result is directory
 }
 
@@ -58,6 +60,7 @@ require("nuke").setup {
   smart_view = {
     custom = {
       {extension = "so", command = "ldd -r {} | less"},
+      {extension = "pdf", command = "xournalpp {}"},
     },
   },
 }
@@ -104,6 +107,15 @@ require("find").setup{
     },
   },
   refresh_screen_key = "ctrl-r",
+}
+
+require("dragon").setup{
+  mode = "selection_ops",
+  key = "D",
+  drag_args = "",
+  drop_args = "",
+  keep_selection = false,
+  bin = "ripdrag",
 }
 
 -- fuzzy search history directories (go_to menu)

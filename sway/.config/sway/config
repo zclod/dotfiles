@@ -22,7 +22,9 @@ set $menu rofi -show run
 
 exec foot --server
 exec nm-applet
-# exec systemctl --user start kanshi
+#exec kanshi -c /home/cla/.config/kanshi/config
+exec shikane
+#exec sleep 5; systemctl --user start kanshi.service
 
 # Notification Daemon
 exec swaync
@@ -34,7 +36,8 @@ bindsym $mod+n exec swaync-client -t -sw
 
 exec_always {
     nwg-panel
-    # systemctl --user reload-or-restart kanshi
+    #pkill kanshi; exec kanshi -c /home/cla/.config/kanshi/config
+    shikanectl reload
 }
 
 ### Output configuration
@@ -43,21 +46,27 @@ exec_always {
 
 include "$HOME/.cache/wal/colors-sway"
 
+set $transparent #ffffff00
+
 # class                 border    backgr.   text      indicator child_border
 client.focused          $color1   $color1   $color0   $color1   $color1
-client.unfocused        $color2   $color2   $color0   $color2   $color2
-client.focused_inactive $color3   $color3   $color1   $color3   $color3
+#client.unfocused        $color2   $color2   $color0   $color2   $color2
+client.unfocused        $color2   $color2   $color0   $color2   $transparent
+#client.focused_inactive $color3   $color3   $color1   $color3   $color3
+client.focused_inactive $color3   $color3   $color1   $color3   $transparent
 client.urgent           $color15  $color15  $color7   $color15  $color15
 client.placeholder      $color3   $color3   $color7   $color3   $color3
 
 client.background       $background
 
+#include "$HOME/.config/sway/workspaces"
 
 output * bg $wallpaper fill
 
-gaps inner 10
+gaps inner 8
 
-default_border none
+#default_border none
+default_border pixel 2
 #
 # Example configuration:
 #
@@ -81,6 +90,7 @@ for_window [instance="chromium"] $video
 for_window [app_id="mpv"] $video
 for_window [class="firefox"] $video
 for_window [app_id="firefox"] $video
+for_window [app_id="pavucontrol"] floating enable, resize set width 80 ppt height 60 ppt
 
 ### Idle configuration
 #
@@ -108,6 +118,10 @@ exec swayidle -w \
 # Read `man 5 sway-input` for more information about this section.
 input type:keyboard {
     xkb_layout it
+}
+
+input 65261:24672:Claudio_Zanasi_Atreus {
+    xkb_layout us
 }
 
 ### Key bindings

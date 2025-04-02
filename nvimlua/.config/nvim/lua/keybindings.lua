@@ -1,5 +1,7 @@
 local map = require('utils').map
 
+vim.keymap.del("v", " ")
+
 map("i", "jk", "<esc>")
 map("i", "kj", "<esc>")
 
@@ -30,8 +32,8 @@ map("n", "C-q", "<cmd>copen<cr>")
 ----------------------------------------------------------------------
 --# b    -Buffers
 map("n", "<Leader>bd", '<cmd>bdelete<cr>', { desc = "[d]elete current buffer"})
-map("n", "<Leader>bD", '<cmd>w \\| %bd \\| e#<cr>', { desc = "[D]elete all other buffers" })
-map("n", "<Leader>bfd", '<cmd>bdelete!<cr>', { desc = "[f]orce [d]elete current buffer" })
+map("n", "<Leader>bDo", '<cmd>w \\| %bd \\| e#<cr>', { desc = "[D]elete all [o]ther buffers" })
+map("n", "<Leader>bDf", '<cmd>bdelete!<cr>', { desc = "[f]orce [D]elete current buffer" })
 
 ----------------------------------------------------------------------
 --# c    -Configuration
@@ -48,6 +50,7 @@ map('n', '<leader>dq', vim.diagnostic.setloclist, { desc = "Open diagnostics lis
 --# f    -Files
 map("n", "<Leader>fs", '<cmd>w<cr>', { desc = "[f]ile [s]ave" })
 map("n", "<Leader>fS", '<cmd>wa<cr>', { desc = "[S]ave all open files" })
+map("n", "<Leader>fr", '<cmd>checktime<cr>', { desc = "[r]eload current [f]ile" })
 
 ----------------------------------------------------------------------
 --# g    -Git

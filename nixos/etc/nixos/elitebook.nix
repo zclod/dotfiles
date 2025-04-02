@@ -21,6 +21,9 @@ let
     };
 in
 {
+
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+
     boot.kernelParams = [
         "pcie_aspm=force"
     ];

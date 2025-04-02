@@ -16,3 +16,10 @@ vim.api.nvim_create_autocmd({'BufEnter'}, {
   pattern = {"*overleaf.com_*"},
   command = "set filetype=tex",
 })
+
+--per autoread dei file
+--vim.o.autoread = true -- gia definita in options.lua
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = "*",
+})

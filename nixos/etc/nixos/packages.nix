@@ -1,4 +1,10 @@
 {pkgs, ...}:
+
+let 
+    unstable = import <unstable> {};
+
+in
+
 {
     environment.systemPackages = with pkgs; [
         neovim
@@ -8,6 +14,7 @@
         pipe-rename
         sd
         pistol
+        ripdrag
 
         htop
         git
@@ -30,5 +37,8 @@
         ffmpeg
         mpv
         qimgv
+
+
+        unstable.aider-chat
     ];
 }
