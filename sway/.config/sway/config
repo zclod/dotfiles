@@ -82,6 +82,7 @@ for_window [app_id="org.gnome.Calendar"] floating enable, resize set width 60 pp
 for_window [app_id="keepassxc"] floating enable, resize set width 60 ppt height 60 ppt
 for_window [app_id="htop"] floating enable, resize set width 80 ppt height 60 ppt
 for_window [app_id=".blueman-manager-wrapped"] floating enable, resize set width 60 ppt height 60 ppt
+for_window [app_id="pulsemixer"] floating enable, resize set width 60 ppt height 60 ppt
 
 ### Idle configuration
 #
@@ -106,6 +107,10 @@ input 65261:24672:Claudio_Zanasi_Atreus {
     xkb_layout us
 }
 
+bar {
+    swaybar_command waybar
+}
+
 ### Key bindings
 #
 # Basics:
@@ -124,6 +129,9 @@ input 65261:24672:Claudio_Zanasi_Atreus {
 
     #start htop
     bindsym $mod+delete exec $term -e --app-id=htop htop
+    
+    #start audio mixer
+    bindsym $mod+m exec $term -e --app-id=pulsemixer pulsemixer
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

@@ -58,6 +58,9 @@ in
         wpgtk
         # set the wpgtk theme through nwg-look
         nwg-look
+        gowall #Tool to convert a Wallpaper's color scheme / palette
+
+
         swaynotificationcenter
 
         shikane # automatic display configuration manager
@@ -67,6 +70,7 @@ in
         xfce.thunar-volman
         xfce.thunar-archive-plugin
 
+        pulsemixer #tui mixer
         pavucontrol
         qpwgraph
         jamesdsp
@@ -114,6 +118,4 @@ in
         enable = true;
         wrapperFeatures.gtk = true;
     };
-
-    programs.waybar.enable = true;
 }
