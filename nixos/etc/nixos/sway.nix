@@ -45,9 +45,11 @@ in
         grim # screenshot functionality
         slurp # screenshot functionality
         wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+        wl-mirror # for screen mirroring
         rofi-wayland
         # mako # notification system developed by swaywm maintainer
         wdisplays # tool to configure displays
+        # nwg-displays # tool to configure displays
         wlogout
         unstable.waybar
         gnome-calendar
@@ -56,14 +58,11 @@ in
         wpgtk
         # set the wpgtk theme through nwg-look
         nwg-look
-        nwg-panel
-        # nwg-shell-config
-        # nwg-displays # tool to configure displays
         swaynotificationcenter
 
-        shikane
+        shikane # automatic display configuration manager
 
-        xplr
+        xplr # terminal based file manager
         xfce.thunar
         xfce.thunar-volman
         xfce.thunar-archive-plugin
@@ -78,30 +77,12 @@ in
         "application/pdf" = "firefox.desktop";
     };
 
-# non piu necessario da doc nixos??????
-#    services.dbus.enable = true;
-#    xdg.portal = {
-#        enable = true;
-#        wlr.enable = true;
-#        # gtk portal needed to make gtk apps happy
-#        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-#    };
-
-#    systemd.services.kanshi = {
-#      description = "kanshi daemon";
-#      enable = true;
-#      environment = {
-#        HOME="/home/cla/";
-#        XDG_RUNTIME_DIR="/home/cla/.config/kanshi";
-#      };
-#      serviceConfig = {
-#        Type = "simple";
-#        ExecStart = ''${pkgs.kanshi}/bin/kanshi -c /home/cla/.config/kanshi/config'';
-#        Restart= "always";
-#      };
-#      wantedBy = ["sway-session.target"];
-#      #wantedBy = ["multi-user.target"];
-#    };
+   xdg.portal = {
+       enable = true;
+       wlr.enable = true;
+       # gtk portal needed to make gtk apps happy
+       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+   };
 
     services.pipewire = {
         enable = true;
@@ -123,10 +104,16 @@ in
     };
     # programs.regreet.enable = true;
 
+    # Enable the gnome-keyring secrets vault. 
+    # Will be exposed through DBus to programs willing to store secrets.
+    services.gnome.gnome-keyring.enable = true;
+
     security.pam.services.swaylock = {}; 
 
     programs.sway = {
         enable = true;
         wrapperFeatures.gtk = true;
     };
+
+    programs.waybar.enable = true;
 }

@@ -24,7 +24,6 @@ exec foot --server
 exec nm-applet
 # exec blueman-applet
 exec shikane
-exec waybar
 # Notification Daemon
 exec swaync
 
@@ -34,11 +33,9 @@ bindsym $mod+n exec swaync-client -t -sw
 # set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
-    #nwg-panel
     shikanectl reload
 }
 
-# bar swaybar_command waybar
 
 ### Output configuration
 
@@ -57,21 +54,12 @@ client.placeholder      $color3   $color3   $color7   $color3   $color3
 
 client.background       $background
 
-#include "$HOME/.config/sway/workspaces"
-
 output * bg $wallpaper fill
 
 gaps inner 8
 
 #default_border none
 default_border pixel 2
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
 
 set {
 	$ii inhibit_idle focus
@@ -83,7 +71,7 @@ set {
 	$max inhibit_idle visible; floating enable; sticky enable; border pixel 1
 }
 
-for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable, resize set width 1030 height 710
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable, resize set width 60 ppt height 60 ppt
 for_window [instance="chromium"] $video
 for_window [app_id="mpv"] $video
 for_window [class="firefox"] $video
@@ -107,15 +95,6 @@ exec swayidle -w \
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
@@ -217,6 +196,7 @@ input 65261:24672:Claudio_Zanasi_Atreus {
     # respectively.
     bindsym $mod+b splith
     bindsym $mod+v splitv
+    bindsym $mod+c split none
 
     # Switch the current container between different layout styles
     # bindsym $mod+s layout stacking
