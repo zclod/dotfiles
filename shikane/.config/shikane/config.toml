@@ -23,6 +23,7 @@ position = "1280,0"
 scale = 1.5
 transform = "normal"
 adaptive_sync = false
+exec = ["swaymsg workspace 1, move workspace to $SHIKANE_OUTPUT_NAME"]
 
 [[profile.output]]
 enable = true
@@ -32,3 +33,4 @@ position = "0,0"
 scale = 1.5
 transform = "normal"
 adaptive_sync = false
+exec = ["swaymsg workspace 2, move workspace to $SHIKANE_OUTPUT_NAME"]

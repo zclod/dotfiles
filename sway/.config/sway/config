@@ -22,10 +22,9 @@ set $menu rofi -show run
 
 exec foot --server
 exec nm-applet
-#exec kanshi -c /home/cla/.config/kanshi/config
+# exec blueman-applet
 exec shikane
-#exec sleep 5; systemctl --user start kanshi.service
-
+exec waybar
 # Notification Daemon
 exec swaync
 
@@ -35,14 +34,13 @@ bindsym $mod+n exec swaync-client -t -sw
 # set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
-    nwg-panel
-    #pkill kanshi; exec kanshi -c /home/cla/.config/kanshi/config
+    #nwg-panel
     shikanectl reload
 }
 
+# bar swaybar_command waybar
+
 ### Output configuration
-#
-# Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
 
 include "$HOME/.cache/wal/colors-sway"
 
@@ -74,7 +72,6 @@ default_border pixel 2
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
-for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable, resize set width 1030 height 710
 
 set {
 	$ii inhibit_idle focus
@@ -86,11 +83,17 @@ set {
 	$max inhibit_idle visible; floating enable; sticky enable; border pixel 1
 }
 
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable, resize set width 1030 height 710
 for_window [instance="chromium"] $video
 for_window [app_id="mpv"] $video
 for_window [class="firefox"] $video
 for_window [app_id="firefox"] $video
+
 for_window [app_id="pavucontrol"] floating enable, resize set width 80 ppt height 60 ppt
+for_window [app_id="org.gnome.Calendar"] floating enable, resize set width 60 ppt height 60 ppt
+for_window [app_id="keepassxc"] floating enable, resize set width 60 ppt height 60 ppt
+for_window [app_id="htop"] floating enable, resize set width 80 ppt height 60 ppt
+for_window [app_id=".blueman-manager-wrapped"] floating enable, resize set width 60 ppt height 60 ppt
 
 ### Idle configuration
 #
@@ -132,13 +135,16 @@ input 65261:24672:Claudio_Zanasi_Atreus {
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+c kill
+    bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
 
     #start terminal file explorer
     bindsym $mod+e exec $term -e xplr
+
+    #start htop
+    bindsym $mod+delete exec $term -e --app-id=htop htop
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

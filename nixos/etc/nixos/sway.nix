@@ -1,9 +1,9 @@
 {pkgs, ...}:
 
-#let 
-#    unstable = import <nixos-unstable> {};
-#
-#in
+let 
+   unstable = import <unstable> {};
+
+in
 
 {
     hardware.bluetooth.enable = true;
@@ -48,6 +48,9 @@
         rofi-wayland
         # mako # notification system developed by swaywm maintainer
         wdisplays # tool to configure displays
+        wlogout
+        unstable.waybar
+        gnome-calendar
 
         # perform wpg-install.sh -g and -i to install gtk themes
         wpgtk

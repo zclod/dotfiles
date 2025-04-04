@@ -1,149 +1,100 @@
 {
-    "layer": "top",
-    "position": "top",
-    "height": 25,
-    "margin-left": 0,
-    "margin-right": 0,
-    "margin-top": 0,
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["clock", "idle_inhibitor"],
+    "modules-right": ["tray", "pulseaudio", "custom/notification", "battery", "custom/power"],
 
-    // Choose the order of the modules
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
 
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": [],
-    "modules-right": ["cpu", "temperature", "memory", "backlight", "pulseaudio", "clock", "tray"],
+    "sway/workspaces": {
+        "all-outputs": true
+    },
 
-    // Modules configuration
-    "hyprland/workspaces": {
-        "on-click": "activate",
-        //"active-only": false,
-        "all-outputs": true,
-        "persistent-workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": [],
-            "6": [],
-            "7": [],
-            "8": [],
-            "9": [],
-            "10": [],
-         },
+    "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
-            "6": "",
-            "7": "",
-            "8": "",
-            "9": "󰙯",
-            "10": ""
-            // "urgent": "",
-            // "active": "",
-            // "default": ""
-         },
-    },
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
-        }
-    },
-    "wlr/taskbar": {
-        "format": "{icon}",
-        "icon-size": 18,
-        "tooltip-format": "{title}",
-        "on-click": "activate",
-        "on-click-middle": "close",
-        "ignore-list": [
-           "kitty",
-           "foot",
-           "footclient"
-        ],
-    },
-    "tray": {
-        "icon-size": 22,
-        "spacing": 5,
-        "show-passive-items": true,
-    },
-    "clock": {
-        "interval": 60,
-        "format": "{:%a %I:%M %p  }", // %b %d %Y  --Date formatting
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-   "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        // "format-critical": "{temperatureC}°C {icon}",
-        "critical-threshold": 80,
-        "interval": 15,
-        "format": "{temperatureC}°C ",
-        "format-icons": ["", "", ""]
-    },
-    "cpu": {
-        "interval": 15,
-        "format": "{usage}% ",
-        "tooltip": false
-    },
-    "memory": {
-        "interval": 15,
-        "format": "{}% "
-    },
-   "disk": {
-        "interval": 15,
-        "format": "{percentage_used}% 󰋊",
-    },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
-    },
-    "battery": {
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
+            "activated": " ",
+            "deactivated": " "
         },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2"
+
+    "tray": {
+        "icon-size": 20,
+	"show-passive-items": true,
+        "spacing": 10,
+	"expand": true
     },
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": " :{ipaddr}", //({essid} {signalStrength}%)
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+
+    "battery": {
+	    "interval": 60,
+	    "states": {
+		    "warning": 30,
+		    "critical": 15
+	    },
+	    "format": "{capacity}% {icon}",
+	    "format-icons": ["", "", "", "", ""],
+	    "max-length": 25
     },
+
+    "clock": {
+        "format": "{:%B %d, %Y - %H:%M}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+                    "mode"          : "month",
+                    "mode-mon-col"  : 3,
+                    "weeks-pos"     : "right",
+                    "on-scroll"     : 1,
+                    "format": {
+                              "months":     "<span color='#ffead3'><b>{}</b></span>",
+                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              }
+                    },
+        "actions":  {
+                    "on-click-right": "mode",
+                    "on-scroll-up": "tz_up",
+                    "on-scroll-down": "tz_down",
+                    "on-scroll-up": "shift_up",
+                    "on-scroll-down": "shift_down",
+                    },
+    	"on-click": "gnome-calendar"
+    },
+
+    "custom/notification": {
+	    "tooltip": false,
+	    "format": "{icon}",
+	    "format-icons": {
+		    "notification": " <span foreground='red'><sup> </sup></span>",
+		    "none": " ",
+		    "dnd-notification": " <span foreground='red'><sup> </sup></span>",
+		    "dnd-none": " ",
+		    "inhibited-notification": " <span foreground='red'><sup> </sup></span>",
+		    "inhibited-none": " ",
+		    "dnd-inhibited-notification": " <span foreground='red'><sup> </sup></span>",
+		    "dnd-inhibited-none": " "
+	    },
+	    "return-type": "json",
+	    "exec-if": "which swaync-client",
+	    "exec": "swaync-client -swb",
+	    "on-click": "swaync-client -t -sw",
+	    "on-click-right": "swaync-client -d -sw",
+	    "escape": true
+    },
+
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon}", //{format_source}",
-        "format-bluetooth": "{volume}% {icon} 󰂯", //{format_source}",
-        "format-bluetooth-muted": "󰖁 {icon} 󰂯", //{format_source}",
-        "format-muted": "󰖁 {format_source}",
+        "format": "{volume}% {icon} ",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": "0% {icon} ",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "󰋋",
-            "hands-free": "󱡒",
-            "headset": "󰋎",
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
             "phone": "",
             "portable": "",
             "car": "",
@@ -151,10 +102,19 @@
         },
         "on-click": "pavucontrol"
     },
+
     "custom/power": {
-      "format": "{icon}",
-      "format-icons": "",// 󰣇
-      "exec-on-event": "true",
-      "on-click": "wlogout",
-    }
+	    "format": " ",
+	    "on-click": "wlogout"
+    },
+
+    //"custom/scratchpad-indicator": {
+    //    "format-text": "{}hi",
+    //    "return-type": "json",
+    //    "interval": 3,
+    //    "exec": "~/.local/bin/scratchpad-indicator 2> /dev/null",
+    //    "exec-if": "exit 0",
+    //    "on-click": "swaymsg 'scratchpad show'",
+    //    "on-click-right": "swaymsg 'move scratchpad'"
+    //},
 }
