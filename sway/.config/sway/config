@@ -18,7 +18,9 @@ set $term footclient
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu rofi -show run
+set $menu rofi -show drun
+set $switchwindows rofi -show window
+set $runcommand rofi -kb-accept-entry "Shift+Return" -kb-accept-alt "Return" -show run
 
 exec foot --server
 exec nm-applet
@@ -83,6 +85,7 @@ for_window [app_id="keepassxc"] floating enable, resize set width 60 ppt height 
 for_window [app_id="htop"] floating enable, resize set width 80 ppt height 60 ppt
 for_window [app_id=".blueman-manager-wrapped"] floating enable, resize set width 60 ppt height 60 ppt
 for_window [app_id="pulsemixer"] floating enable, resize set width 60 ppt height 60 ppt
+for_window [app_id="roficmd"] floating enable, resize set width 80 ppt height 60 ppt
 
 ### Idle configuration
 #
@@ -123,6 +126,8 @@ bar {
 
     # Start your launcher
     bindsym $mod+d exec $menu
+    bindsym $mod+w exec $switchwindows
+    bindsym $mod+r exec $runcommand
 
     #start terminal file explorer
     bindsym $mod+e exec $term -e xplr
@@ -173,6 +178,10 @@ bar {
 # Workspaces:
 #
     # Switch to workspace
+    bindsym $mod+y workspace number 1
+    bindsym $mod+u workspace number 2
+    bindsym $mod+i workspace number 3
+    bindsym $mod+o workspace number 4
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
     bindsym $mod+3 workspace number 3
@@ -184,6 +193,10 @@ bar {
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
     # Move focused container to workspace
+    bindsym $mod+Shift+y move container to workspace number 1
+    bindsym $mod+Shift+u move container to workspace number 2
+    bindsym $mod+Shift+i move container to workspace number 3
+    bindsym $mod+Shift+o move container to workspace number 4
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
     bindsym $mod+Shift+3 move container to workspace number 3
@@ -257,7 +270,7 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym $mod+Shift+r mode "resize"
 
 mode "present" {
     # command starts mirroring
