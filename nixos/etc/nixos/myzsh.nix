@@ -23,5 +23,8 @@
         SUDO_EDITOR = "nvim";
         VISUAL = "nvim";
         XPLR_BOOKMARK_FILE = "$HOME/.xplrbookmarks";
+
+        #for java applications
+        _JAVA_AWT_WM_NONREPARENTING="1";
     };
 }

@@ -2,3 +2,4 @@
 plugged/
 autoload/
 *.netrwhist
+*.log

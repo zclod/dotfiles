@@ -6,6 +6,9 @@ let
 in
 
 {
+
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+
     hardware.bluetooth.enable = true;
     hardware.bluetooth.settings = {
       General = {
@@ -60,12 +63,12 @@ in
         nwg-look
         gowall #Tool to convert a Wallpaper's color scheme / palette
 
-
         swaynotificationcenter
 
         shikane # automatic display configuration manager
 
         xplr # terminal based file manager
+        udiskie
         xfce.thunar
         xfce.thunar-volman
         xfce.thunar-archive-plugin

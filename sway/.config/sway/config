@@ -25,6 +25,7 @@ set $runcommand rofi -kb-accept-entry "Shift+Return" -kb-accept-alt "Return" -sh
 exec foot --server
 exec nm-applet
 # exec blueman-applet
+exec udiskie --smart-tray
 exec shikane
 # Notification Daemon
 exec swaync
@@ -84,6 +85,7 @@ for_window [app_id="org.gnome.Calendar"] floating enable, resize set width 60 pp
 for_window [app_id="keepassxc"] floating enable, resize set width 60 ppt height 60 ppt
 for_window [app_id="htop"] floating enable, resize set width 80 ppt height 60 ppt
 for_window [app_id=".blueman-manager-wrapped"] floating enable, resize set width 60 ppt height 60 ppt
+for_window [app_id="qbittorrent"] floating enable, resize set width 80 ppt height 80 ppt
 for_window [app_id="pulsemixer"] floating enable, resize set width 60 ppt height 60 ppt
 for_window [app_id="roficmd"] floating enable, resize set width 80 ppt height 60 ppt
 
@@ -149,7 +151,7 @@ bar {
     bindsym $mod+Shift+c reload
 
     # Take screenshot
-    bindsym $mod+t exec grim  -g "$(slurp)" /tmp/$(date +'screenshot_%H:%M:%S.png')
+    bindsym $mod+t exec grim  -g "$(slurp)" /tmp/$(date +'screenshot_%H%M%S.png')
 
     # Brightness
     bindsym XF86MonBrightnessDown exec light -U 10
@@ -225,7 +227,7 @@ bar {
     bindsym $mod+a layout toggle split
 
     # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+    bindsym $mod+Shift+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+space floating toggle
