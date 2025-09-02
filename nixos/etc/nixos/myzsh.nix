@@ -10,12 +10,14 @@
     programs.zsh.ohMyZsh.plugins = [ "git" "colored-man-pages" "command-not-found" "extract" "fzf" "direnv" ];
     programs.zsh.ohMyZsh.theme = "avit";
 
+    programs.zoxide.enable = true;
+    programs.zoxide.enableZshIntegration = true;
 
     programs.zsh.shellAliases = {
         e = "nvim";
         se = "sudoedit";
         lg = "lazygit";
-        f = ''cd "$(xplr --print-pwd-as-result)"'';
+        f = ''z "$(xplr --print-pwd-as-result)"'';
     };
 
     environment.variables = {

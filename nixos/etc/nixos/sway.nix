@@ -32,8 +32,9 @@ in
     # for wpgtk
     programs.dconf.enable = true;
 
+    fonts.enableDefaultPackages = true;
     fonts.packages = with pkgs; [
-       inconsolata-nerdfont 
+       nerd-fonts.inconsolata
        liberation_ttf
     ];
 
