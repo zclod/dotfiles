@@ -28,6 +28,17 @@
                 "force user" = "cla";
                 #"force group" = "groupname";
             };
+            "media" = {
+                "path" = "/home/cla/media";
+                "browseable" = "yes";
+                "read only" = "yes";
+                # "guest ok" = "yes";
+                "guest ok" = "no";
+                "create mask" = "0644";
+                "directory mask" = "0755";
+                "force user" = "cla";
+                #"force group" = "groupname";
+            };
             # "private" = {
             #   "path" = "/mnt/Shares/Private";
             #   "browseable" = "yes";

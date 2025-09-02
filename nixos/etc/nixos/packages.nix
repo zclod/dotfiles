@@ -6,6 +6,9 @@ let
 in
 
 {
+
+    nixpkgs.config.allowUnfree = true;
+
     environment.systemPackages = with pkgs; [
         neovim
 	fd
@@ -22,6 +25,7 @@ in
 
         unzip
         rclone
+        rar
 
         keepassxc
 
@@ -43,9 +47,15 @@ in
         unstable.aider-chat
         unstable.aichat
         poppler-utils
+
+        unstable.jujutsu
+        unstable.jjui
     ];
 
     programs.virt-manager.enable = true;
     virtualisation.libvirtd.enable = true;
     users.groups.libvirtd.members = ["cla"];
+
+    programs.direnv.enable = true;
+
 }

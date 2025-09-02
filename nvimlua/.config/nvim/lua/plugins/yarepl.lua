@@ -11,6 +11,10 @@ return {
     
     config = function()
         -- necessario fare cosi per utilizzare le estensioni
+        require('yarepl.extensions.aider').setup{
+            wincmd = 'belowright 15 split'
+        }
+
         require('yarepl').setup({
             metas = { aider = require('yarepl.extensions.aider').create_aider_meta() },
         })

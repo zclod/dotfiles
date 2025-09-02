@@ -7,7 +7,7 @@
     programs.zsh.enableCompletion = true;
     programs.zsh.syntaxHighlighting.enable = true;
     programs.zsh.ohMyZsh.enable = true;
-    programs.zsh.ohMyZsh.plugins = [ "git" "colored-man-pages" "command-not-found" "extract" "fzf" ];
+    programs.zsh.ohMyZsh.plugins = [ "git" "colored-man-pages" "command-not-found" "extract" "fzf" "direnv" ];
     programs.zsh.ohMyZsh.theme = "avit";
 
 
