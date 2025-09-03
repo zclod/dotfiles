@@ -21,6 +21,7 @@ in
 
         htop
         git
+        gh
         stow
 
         unzip

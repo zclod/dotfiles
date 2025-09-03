@@ -122,7 +122,7 @@ require("dragon").setup{
 require("zoxide").setup{
   bin = "zoxide",
   mode = "default",
-  key = "Z",
+  key = "z",
 }
 
 -- fuzzy search history directories (go_to menu)
