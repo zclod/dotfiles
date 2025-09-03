@@ -13,7 +13,6 @@ id: ADR-00000
 ## Context and Problem Statement
 
 
-
 ## Decision Drivers (Optional)
 
 * <!-- decision driver -->

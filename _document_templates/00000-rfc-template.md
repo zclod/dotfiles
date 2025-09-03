@@ -12,6 +12,8 @@ id: RFC-00000
 # Summary:
     <!-- // Bottom line, up front. Short, snappy and if there is to be a call-to-action, this is where it needs to go. -->
 
+# Motivation
+
 # Glossary:
     <!-- // A glossary of terms used in the RFC. -->
 
