@@ -4,7 +4,6 @@ updated-at: YYYY-MM-DD
 author(s):
 collaborator(s):
 id: PRD-00000
-
 ---
 
 # <!-- title of the document -->

@@ -5,7 +5,6 @@ incident-date:
 author(s):
 collaborator(s):
 id: POST-M-00000
-
 ---
 
 # <!-- a short title -->
